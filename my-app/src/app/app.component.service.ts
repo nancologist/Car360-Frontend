@@ -11,9 +11,6 @@ export class AppService {
   }
 
   getHello() {
-     console.log('Hello app service!!!');
-     
-     // TODO: add the http request GET localhost:8080/hello here!
-     return this.http.get('http://localhost:8080/hello')
-   }
- }
+    return this.http.get<{ message: string }>('http://localhost:8080/hello')
+  }
+}
