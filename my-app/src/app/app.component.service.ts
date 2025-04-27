@@ -13,4 +13,8 @@ export class AppService {
   getHello() {
     return this.http.get<{ message: string }>('http://localhost:8080/hello')
   }
+
+  getUsers() {
+    return this.http.get('http://localhost:8080/users')
+  }
 }

@@ -19,4 +19,10 @@ export class AppComponent {
       this.title = res.message;
     })
   }
+
+  getUsers() {
+    this.appService.getUsers().subscribe((res) => {
+      console.log(res);
+    })
+  }
 }
