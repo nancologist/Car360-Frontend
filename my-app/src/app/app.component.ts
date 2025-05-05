@@ -9,19 +9,13 @@ import { AppService } from './app.component.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+
   title = 'Hello Berlin!';
 
   constructor(private appService: AppService) {}
 
-  onClick() {
-    this.appService.getHello().subscribe((res) => {
-      this.title = res.message;
-    })
-  }
-
-  getUsers() {
-    this.appService.getUsers().subscribe((res) => {
+  getCarInfos() {
+    this.appService.getCarInfos().subscribe((res) => {
       console.log(res);
     })
   }
