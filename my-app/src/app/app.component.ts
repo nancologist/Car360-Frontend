@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AppService } from './app.component.service';
+import {Component, OnInit} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {AppService} from './app.component.service';
+import {CardComponent} from '../components/card/card.component';
+import {CarInfoDto} from '../shared';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, CardComponent, NgForOf],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  title = 'Hello Berlin!';
+    title = 'Welcome to Car360 🚗';
+    carInfos: CarInfoDto[] = [];
 
-  constructor(private appService: AppService) {}
+    constructor(private appService: AppService) {
+    }
 
-  getCarInfos() {
-    this.appService.getCarInfos().subscribe((res) => {
-      console.log(res);
-    })
-  }
+    ngOnInit() {
+        this.appService.getCarInfos().subscribe(res => {
+            this.carInfos = res;
+        })
+    }
+
+    trackByCarId(index: number, carInfo: CarInfoDto) {
+        return carInfo.carId;
+    }
 }

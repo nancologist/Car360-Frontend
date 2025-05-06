@@ -1,6 +1,12 @@
 <main class="main">
-  <h1>{{ title }}</h1>
-  <button (click)="getCarInfos()">Fetch cars!</button>
+    <h1 class="title">{{ title }}</h1>
+
+    <div class="cards">
+        <app-card
+            *ngFor="let carInfo of carInfos; trackBy: trackByCarId"
+            [carInfo]="carInfo"
+        ></app-card>
+    </div>
 </main>
 
-<router-outlet />
+<router-outlet/>
