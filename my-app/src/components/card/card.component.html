@@ -1,4 +1,4 @@
-<mat-card class="card" appearance="outlined">
+<mat-card class="card" appearance="outlined" (click)="onCardClicked(carInfo?.carId)">
     <mat-card-header>
         <mat-card-title-group>
             <mat-card-title>{{ carInfo?.name }}</mat-card-title>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {
   MatCard,
   MatCardContent,
@@ -18,4 +18,9 @@ import {NgOptimizedImage} from '@angular/common';
 })
 export class CardComponent {
     @Input() carInfo?: CarInfoDto;
+    @Output() cardClicked = new EventEmitter<number>();
+
+    onCardClicked(carId: number | undefined) {
+        this.cardClicked.emit(carId)
+    }
 }

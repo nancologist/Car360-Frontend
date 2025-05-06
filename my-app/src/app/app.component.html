@@ -5,6 +5,7 @@
         <app-card
             *ngFor="let carInfo of carInfos; trackBy: trackByCarId"
             [carInfo]="carInfo"
+            (cardClicked)="onCardClicked($event)"
         ></app-card>
     </div>
 </main>

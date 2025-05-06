@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {AppService} from './app.component.service';
 import {CardComponent} from '../components/card/card.component';
-import {CarInfoDto} from '../shared';
+import {CarDto, CarInfoDto} from '../shared';
 import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
@@ -27,5 +27,11 @@ export class AppComponent implements OnInit {
 
     trackByCarId(index: number, carInfo: CarInfoDto) {
         return carInfo.carId;
+    }
+
+    onCardClicked(id: number) {
+        this.appService.getCarById(id).subscribe((car: CarDto) => {
+            console.log(car)
+        })
     }
 }

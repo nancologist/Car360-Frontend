@@ -20,6 +20,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/cars/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getCar"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -31,6 +47,30 @@ export interface components {
             productionDate?: string;
             color?: string;
         };
+        CarDTO: {
+            /** Format: int64 */
+            id?: number;
+            vin?: string;
+            manufacturer?: string;
+            model?: string;
+            bodyStyleCode?: string;
+            steering?: string;
+            facelift?: boolean;
+            /** Format: date-time */
+            productionDate?: string;
+            color?: string;
+            upholstery?: string;
+            /** Format: int32 */
+            powerInKw?: number;
+            /** Format: float */
+            displacementInLiter?: number;
+            /** Format: int32 */
+            doorsCount?: number;
+            transmission?: string;
+            drive?: string;
+            equipments?: components["schemas"]["Equipment"][];
+        };
+        Equipment: Record<string, never>;
     };
     responses: never;
     parameters: never;
@@ -56,6 +96,28 @@ export interface operations {
                 };
                 content: {
                     "*/*": components["schemas"]["CarInfoDTO"][];
+                };
+            };
+        };
+    };
+    getCar: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["CarDTO"];
                 };
             };
         };
