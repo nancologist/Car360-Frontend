@@ -1,7 +1,11 @@
-<div class="cards">
-    <app-card
-        *ngFor="let carInfo of carInfos; trackBy: trackByCarId"
-        [carInfo]="carInfo"
-        (cardClicked)="onCardClicked($event)"
-    ></app-card>
+<div class="home">
+    <div class="car-grid">
+        <app-card
+            *ngFor="let carInfo of carInfos; trackBy: trackByCarId"
+            [car]="carInfo"
+            (cardClicked)="onCardClicked($event)"
+        />
+        <p *ngIf="carInfos.length === 0">No cars available at the moment.</p>
+    </div>
+
 </div>

@@ -1,19 +1,13 @@
-<mat-card class="card" appearance="outlined" (click)="onCardClicked(carInfo?.carId)">
+<mat-card class="car-card" *ngIf="car">
     <mat-card-header>
-        <mat-card-title-group>
-            <mat-card-title>{{ carInfo?.name }}</mat-card-title>
-            <!-- Todo: show the date in the correct local format (e.g. using Pipes)-->
-            <mat-card-subtitle>{{ carInfo?.productionDate }}</mat-card-subtitle>
-            <img
-                mat-card-md-image
-                ngSrc="assets/images/bmw-f11.jpeg"
-                alt="Silhouette of BMW F11"
-                height="2048"
-                width="2048"
-            />
-        </mat-card-title-group>
+        <mat-card-title>{{ car.name }}</mat-card-title>
+        <mat-card-subtitle>Production: {{ car.productionDate }}</mat-card-subtitle>
     </mat-card-header>
+    <img mat-card-image ngSrc="assets/images/bmw-f11.jpeg" alt="{{ car.name }}" [height]="256" [width]="256">
     <mat-card-content>
-        {{ carInfo?.color }}
+        <p>Color: {{ car.color }}</p>
     </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="viewCarDetails(car.carId)">View Details</button>
+    </mat-card-actions>
 </mat-card>

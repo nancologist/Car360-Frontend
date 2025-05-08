@@ -1,6 +1,18 @@
-.card {
-    cursor: pointer;
-    height: 200px;
-    margin: 10px;
-    max-width: 300px;
+.car-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px; /* Keep your max-width if needed */
+    height: 100%;
+}
+
+.mat-mdc-card-image {
+    width: 80%;
+    margin: 20px auto;
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    aspect-ratio: 16 / 9; /* Optional: Maintain a consistent aspect ratio */
+}
+
+.mat-mdc-card-actions {
+    display: flex;
+    justify-content: flex-end;
 }

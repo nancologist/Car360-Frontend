@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CardComponent} from "../../components/card/card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {CarCard} from '../../shared';
 import {AppService} from '../../app/app.component.service';
 import {Router} from '@angular/router';
@@ -9,7 +9,8 @@ import {Router} from '@angular/router';
     selector: 'app-home',
     imports: [
         CardComponent,
-        NgForOf
+        NgForOf,
+        NgIf
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'

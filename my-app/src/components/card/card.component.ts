@@ -1,19 +1,20 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {CarCard} from '../../shared';
-import {NgOptimizedImage} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-card',
-    imports: [MatCardModule, NgOptimizedImage],
+    imports: [MatCardModule, NgOptimizedImage, NgIf, MatButtonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-    @Input() carInfo?: CarCard;
+    @Input() car?: CarCard;
     @Output() cardClicked = new EventEmitter<number>();
 
-    onCardClicked(carId: number | undefined) {
+    viewCarDetails(carId: number | undefined) {
         this.cardClicked.emit(carId)
     }
 }
