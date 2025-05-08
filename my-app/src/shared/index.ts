@@ -1,4 +1,5 @@
-import { components } from './api-types';
+import {components} from './api-types';
 
-export type CarInfoDto = components["schemas"]["CarInfoDTO"]
-export type CarDto = components["schemas"]["CarDTO"]
+export type CarCard = components["schemas"]["CarInfoDTO"];
+export type Car = components["schemas"]["CarDTO"];
+export type Equipment = components["schemas"]["Equipment"]

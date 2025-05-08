@@ -70,7 +70,14 @@ export interface components {
             drive?: string;
             equipments?: components["schemas"]["Equipment"][];
         };
-        Equipment: Record<string, never>;
+        Equipment: {
+            /** Format: int64 */
+            id?: number;
+            code?: string;
+            description?: string;
+            descriptionDe?: string;
+            manufacturer?: string;
+        };
     };
     responses: never;
     parameters: never;

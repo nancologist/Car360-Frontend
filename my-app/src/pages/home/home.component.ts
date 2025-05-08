@@ -1,22 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CardComponent} from "../../components/card/card.component";
 import {NgForOf} from "@angular/common";
-import {CarDto, CarInfoDto} from '../../shared';
+import {CarCard} from '../../shared';
 import {AppService} from '../../app/app.component.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+    selector: 'app-home',
     imports: [
         CardComponent,
         NgForOf
     ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
-export class HomeComponent {
-    carInfos: CarInfoDto[] = [];
+export class HomeComponent implements OnInit {
+    carInfos: CarCard[] = [];
 
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private router: Router) {
     }
 
     ngOnInit() {
@@ -25,13 +26,11 @@ export class HomeComponent {
         })
     }
 
-    trackByCarId(index: number, carInfo: CarInfoDto) {
+    trackByCarId(index: number, carInfo: CarCard) {
         return carInfo.carId;
     }
 
     onCardClicked(id: number) {
-        this.appService.getCarById(id).subscribe((car: CarDto) => {
-            console.log(car)
-        })
+        this.router.navigate(['car', id])
     }
 }

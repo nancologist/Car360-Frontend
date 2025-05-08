@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {CarDto, CarInfoDto} from '../shared';
+import {Car, CarCard} from '../shared';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -11,11 +11,11 @@ export class AppService {
     constructor(private http: HttpClient) {
     }
 
-    getCarInfos(): Observable<CarInfoDto[]> {
-        return this.http.get<CarInfoDto[]>('http://localhost:8080/api/cars')
+    getCarInfos(): Observable<CarCard[]> {
+        return this.http.get<CarCard[]>('http://localhost:8080/api/cars')
     }
 
-    getCarById(id: number): Observable<CarDto> {
-        return this.http.get<CarDto>(`http://localhost:8080/api/cars/${id}`)
+    getCarById(id: number): Observable<Car> {
+        return this.http.get<Car>(`http://localhost:8080/api/cars/${id}`)
     }
 }
