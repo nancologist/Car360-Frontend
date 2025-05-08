@@ -1,0 +1,65 @@
+.car-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Spacing between cards */
+    padding: 16px;
+}
+
+.hero-card {
+    /* Style the hero card to stand out */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.core-info {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.vin {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.facelift {
+    color: green; /* Highlight facelift status */
+    font-weight: bold;
+}
+
+.mat-mdc-card-content {
+    padding: 16px
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 8px 16px;
+    margin-bottom: 16px;
+}
+
+.grid-item {
+    word-break: break-word; /* Prevent long words from breaking the layout */
+}
+
+.equipment-card .mat-mdc-card-content {
+    padding-top: 0; /* Adjust padding for the list */
+}
+
+.actions-card {
+    margin-top: 16px;
+}
+
+/*.actions-card .mat-card-actions {*/
+/*    display: flex;*/
+/*    gap: 8px;*/
+/*    justify-content: flex-end; !* Align buttons to the right *!*/
+/*}*/
