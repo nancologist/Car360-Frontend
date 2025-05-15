@@ -58,8 +58,8 @@ export interface components {
             facelift?: boolean;
             /** Format: date-time */
             productionDate?: string;
-            color?: string;
-            upholstery?: string;
+            color?: components["schemas"]["Color"];
+            upholstery?: components["schemas"]["Upholstery"];
             /** Format: int32 */
             powerInKw?: number;
             /** Format: float */
@@ -70,6 +70,13 @@ export interface components {
             drive?: string;
             equipments?: components["schemas"]["Equipment"][];
         };
+        Color: {
+            /** Format: int64 */
+            id?: number;
+            code?: string;
+            manufacturer?: string;
+            name?: string;
+        };
         Equipment: {
             /** Format: int64 */
             id?: number;
@@ -77,6 +84,13 @@ export interface components {
             description?: string;
             descriptionDe?: string;
             manufacturer?: string;
+        };
+        Upholstery: {
+            /** Format: int64 */
+            id?: number;
+            code?: string;
+            manufacturer?: string;
+            name?: string;
         };
     };
     responses: never;

@@ -22,8 +22,8 @@
         <mat-card-content>
             <div class="grid-container">
                 <div class="grid-item"><strong>Production Date:</strong> {{ car.productionDate | date }}</div>
-                <div class="grid-item"><strong>Color:</strong> {{ car.color }}</div>
-                <div class="grid-item"><strong>Upholstery:</strong> {{ car.upholstery }}</div>
+                <div class="grid-item"><strong>Color:</strong> {{ car.color?.name }} ({{ car.color?.code }})</div>
+                <div class="grid-item"><strong>Upholstery:</strong> {{ car.upholstery?.name }} ({{ car.upholstery?.code }})</div>
                 <div class="grid-item"><strong>Body Style:</strong> {{ car.bodyStyleCode }}</div>
                 <div class="grid-item"><strong>Steering:</strong> {{ car.steering }}</div>
             </div>
