@@ -11,7 +11,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get: operations["getAllCars"];
+        get: operations["getCarThumbnails"];
         put?: never;
         post?: never;
         delete?: never;
@@ -36,18 +36,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/cars/{id}/color-image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getCarColorImage"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        CarInfoDTO: {
+        CarThumbnailDto: {
             /** Format: int64 */
             carId?: number;
             name?: string;
             productionDate?: string;
             color?: string;
         };
-        CarDTO: {
+        CarDto: {
             /** Format: int64 */
             id?: number;
             vin?: string;
@@ -58,7 +74,6 @@ export interface components {
             facelift?: boolean;
             /** Format: date-time */
             productionDate?: string;
-            color?: components["schemas"]["Color"];
             upholstery?: components["schemas"]["Upholstery"];
             /** Format: int32 */
             powerInKw?: number;
@@ -69,13 +84,14 @@ export interface components {
             transmission?: string;
             drive?: string;
             equipments?: components["schemas"]["Equipment"][];
+            color?: components["schemas"]["ColorDto"];
         };
-        Color: {
+        ColorDto: {
             /** Format: int64 */
             id?: number;
             code?: string;
-            manufacturer?: string;
             name?: string;
+            manufacturer?: string;
         };
         Equipment: {
             /** Format: int64 */
@@ -101,7 +117,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    getAllCars: {
+    getCarThumbnails: {
         parameters: {
             query?: never;
             header?: never;
@@ -116,7 +132,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": components["schemas"]["CarInfoDTO"][];
+                    "*/*": components["schemas"]["CarThumbnailDto"][];
                 };
             };
         };
@@ -138,7 +154,29 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": components["schemas"]["CarDTO"];
+                    "*/*": components["schemas"]["CarDto"];
+                };
+            };
+        };
+    };
+    getCarColorImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": string[];
                 };
             };
         };

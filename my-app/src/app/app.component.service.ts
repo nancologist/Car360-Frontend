@@ -7,15 +7,20 @@ import {Observable} from 'rxjs';
     providedIn: 'root'
 })
 export class AppService {
+    static BASE_URL = 'http://localhost:8080/api';
 
     constructor(private http: HttpClient) {
     }
 
     getCarInfos(): Observable<CarCard[]> {
-        return this.http.get<CarCard[]>('http://localhost:8080/api/cars')
+        return this.http.get<CarCard[]>(AppService.BASE_URL + '/cars')
     }
 
     getCarById(id: number): Observable<Car> {
-        return this.http.get<Car>(`http://localhost:8080/api/cars/${id}`)
+        return this.http.get<Car>(AppService.BASE_URL + `/cars/${id}`)
+    }
+
+    getCarColorImageUrl(carId: number) {
+        return `${AppService.BASE_URL}/cars/${carId}/color-image`;
     }
 }

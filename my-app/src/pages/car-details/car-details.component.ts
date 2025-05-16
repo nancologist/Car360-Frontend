@@ -8,6 +8,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatIcon} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {catchError} from 'rxjs';
 
 @Component({
     selector: 'app-car-details',
@@ -25,9 +26,10 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 })
 export class CarDetailsComponent implements OnInit {
     car: Car | null = null;
+    errMsg: String | null = null;
 
     constructor(
-        private appService: AppService,
+        public appService: AppService,
         private route: ActivatedRoute,
         private destroyRef: DestroyRef
     ) {
@@ -37,8 +39,15 @@ export class CarDetailsComponent implements OnInit {
         const carId = +(this.route.snapshot.params as { id: string }).id;
         this.appService
             .getCarById(carId)
-            .pipe(takeUntilDestroyed(this.destroyRef))
+            .pipe(
+                takeUntilDestroyed(this.destroyRef),
+                catchError((err, caught) => {
+                    this.errMsg = err.error.message;
+                    return caught;
+                })
+            )
             .subscribe((car: Car) => {
+                console.log(car.color)
                 this.car = car;
             });
     }

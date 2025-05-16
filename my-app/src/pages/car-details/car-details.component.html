@@ -1,4 +1,4 @@
-<div class="car-details-container" *ngIf="car; else loadingCar">
+<div class="car-details-container" *ngIf="car; else loadingOrFailed">
     <mat-card class="hero-card">
         <mat-card-header>
             <mat-card-title>{{ car.manufacturer }} {{ car.model }}</mat-card-title>
@@ -26,6 +26,7 @@
                 <div class="grid-item"><strong>Upholstery:</strong> {{ car.upholstery?.name }} ({{ car.upholstery?.code }})</div>
                 <div class="grid-item"><strong>Body Style:</strong> {{ car.bodyStyleCode }}</div>
                 <div class="grid-item"><strong>Steering:</strong> {{ car.steering }}</div>
+                <img [src]="appService.getCarColorImageUrl(car.id ?? 0)" alt="Base64 Image">
             </div>
         </mat-card-content>
     </mat-card>
@@ -71,6 +72,7 @@
     </mat-card>
 </div>
 
-<ng-template #loadingCar>
-    <p>Loading car details...</p>
+<ng-template #loadingOrFailed>
+    <p *ngIf="errMsg === null">Loading car details...</p>
+    <p *ngIf="errMsg !== null">{{ errMsg }}</p>
 </ng-template>
