@@ -26,7 +26,13 @@
                 <div class="grid-item"><strong>Upholstery:</strong> {{ car.upholstery?.name }} ({{ car.upholstery?.code }})</div>
                 <div class="grid-item"><strong>Body Style:</strong> {{ car.bodyStyleCode }}</div>
                 <div class="grid-item"><strong>Steering:</strong> {{ car.steering }}</div>
-                <img [src]="appService.getCarColorImageUrl(car.id ?? 0)" alt="Base64 Image">
+                <img
+                    [src]="appService.getCarColorImageUrl(car.id ?? 0)"
+                    alt="Base64 Image"
+                    (error)="onColorImageError($event)"
+                    width="100"
+                    height="100"
+                >
             </div>
         </mat-card-content>
     </mat-card>

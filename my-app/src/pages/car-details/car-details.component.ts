@@ -47,8 +47,14 @@ export class CarDetailsComponent implements OnInit {
                 })
             )
             .subscribe((car: Car) => {
-                console.log(car.color)
                 this.car = car;
             });
+    }
+
+    onColorImageError(event: Event) {
+        const imgElement = event.target as HTMLImageElement;
+        if (imgElement) {
+            imgElement.src = "assets/images/color-image-fallback.png";
+        }
     }
 }
