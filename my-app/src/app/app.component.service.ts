@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Car, CarCard} from '../shared';
+import {Car, CarCard, LoginRequest} from '../shared';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -22,5 +22,9 @@ export class AppService {
 
     getCarColorImageUrl(carId: number) {
         return `${AppService.BASE_URL}/cars/${carId}/color-image`;
+    }
+
+    postLogin(data: LoginRequest) {
+        return this.http.post(AppService.BASE_URL + '/login', data);
     }
 }
