@@ -21,4 +21,6 @@
     </mat-form-field>
 
     <button mat-flat-button type="submit">LOGIN</button>
+
+    <mat-error *ngIf="loginFailed">Log in failed, try again!</mat-error>
 </form>
