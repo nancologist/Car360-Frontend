@@ -24,8 +24,8 @@ export class LoginComponent {
     }
 
     onSubmit(form: NgForm) {
-        this.appService.postLogin(form.value).subscribe((res) => {
-
-        })
+        // this.appService.postLogin(form.value).subscribe((res) => {
+        //
+        // })
     }
 }

@@ -1,7 +1,7 @@
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Car, CarCard, LoginRequest} from '../shared';
-import {catchError, Observable, throwError} from 'rxjs';
+import {Car, CarCard} from '../shared';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,10 +24,4 @@ export class AppService {
         return `${AppService.BASE_URL}/cars/${carId}/color-image`;
     }
 
-    postLogin(data: LoginRequest) {
-        return this.http.post(AppService.BASE_URL + '/login', data).pipe(
-            catchError((err: HttpErrorResponse) => {
-                console.log(err); return throwError(() => new Error('ffsasf')) })
-        );
-    }
 }

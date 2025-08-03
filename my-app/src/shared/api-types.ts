@@ -4,16 +4,16 @@
  */
 
 export interface paths {
-    "/api/login": {
+    "/api/pg/users": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        get: operations["getUsers"];
         put?: never;
-        post: operations["login"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -72,9 +72,16 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        LoginRequest: {
-            username: string;
-            password: string;
+        PgUser: {
+            /** Format: int64 */
+            id?: number;
+            firstName?: string;
+            lastName?: string;
+            email?: string;
+            gender?: string;
+            /** Format: date */
+            birthDate?: string;
+            country?: string;
         };
         CarThumbnailDto: {
             /** Format: int64 */
@@ -137,18 +144,16 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    login: {
+    getUsers: {
         parameters: {
-            query?: never;
+            query?: {
+                search?: string;
+            };
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LoginRequest"];
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description OK */
             200: {
@@ -156,7 +161,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": Record<string, never>;
+                    "*/*": components["schemas"]["PgUser"][];
                 };
             };
         };
