@@ -4,16 +4,32 @@
  */
 
 export interface paths {
-    "/api/pg/users": {
+    "/api/auth/signup": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["getUsers"];
+        get?: never;
         put?: never;
-        post?: never;
+        post: operations["signup"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["login"];
         delete?: never;
         options?: never;
         head?: never;
@@ -72,16 +88,21 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        PgUser: {
+        SignupRequest: {
+            username: string;
+            email: string;
+            password: string;
+        };
+        LoginRequest: {
+            username: string;
+            password: string;
+        };
+        LoginResponse: {
+            token?: string;
             /** Format: int64 */
-            id?: number;
-            firstName?: string;
-            lastName?: string;
+            userId?: number;
+            username?: string;
             email?: string;
-            gender?: string;
-            /** Format: date */
-            birthDate?: string;
-            country?: string;
         };
         CarThumbnailDto: {
             /** Format: int64 */
@@ -101,6 +122,7 @@ export interface components {
             facelift?: boolean;
             /** Format: date-time */
             productionDate?: string;
+            colorDto?: components["schemas"]["ColorDto"];
             upholstery?: components["schemas"]["Upholstery"];
             /** Format: int32 */
             powerInKw?: number;
@@ -111,7 +133,6 @@ export interface components {
             transmission?: string;
             drive?: string;
             equipments?: components["schemas"]["Equipment"][];
-            color?: components["schemas"]["ColorDto"];
         };
         ColorDto: {
             /** Format: int64 */
@@ -144,16 +165,40 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    getUsers: {
+    signup: {
         parameters: {
-            query?: {
-                search?: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SignupRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    login: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginRequest"];
+            };
+        };
         responses: {
             /** @description OK */
             200: {
@@ -161,7 +206,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": components["schemas"]["PgUser"][];
+                    "*/*": components["schemas"]["LoginResponse"];
                 };
             };
         };
@@ -225,7 +270,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "*/*": string[];
+                    "*/*": string;
                 };
             };
         };
