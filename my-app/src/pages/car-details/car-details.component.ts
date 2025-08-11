@@ -22,7 +22,7 @@ import {catchError} from 'rxjs';
         NgForOf
     ],
     templateUrl: './car-details.component.html',
-    styleUrl: './car-details.component.css'
+    styleUrl: './car-details.component.scss'
 })
 export class CarDetailsComponent implements OnInit {
     car: Car | null = null;

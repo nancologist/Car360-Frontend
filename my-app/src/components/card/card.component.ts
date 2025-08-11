@@ -8,7 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
   selector: 'app-card',
     imports: [MatCardModule, NgOptimizedImage, NgIf, MatButtonModule, DatePipe],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrl: './card.component.scss'
 })
 export class CardComponent {
     @Input() car?: CarCard;

@@ -28,8 +28,8 @@
                             }
                         ],
                         "styles": [
-                            "@angular/material/prebuilt-themes/azure-blue.css",
-                            "src/styles.css"
+                            "src/themes/dark-theme.scss",
+                            "src/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -95,6 +95,11 @@
                 }
             }
         }
+    },
+    "schematics": {
+      "@schematics/angular:component": {
+        "style": "scss"
+      }
     },
     "cli": {
         "analytics": "e72092bd-895f-47f9-b8e6-1e8f18e4b8bc"

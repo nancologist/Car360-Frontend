@@ -8,7 +8,7 @@ import {NgIf} from '@angular/common';
 
 @Component({
     templateUrl: './login.component.html',
-    styleUrl: './login.component.css',
+    styleUrl: './login.component.scss',
     imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButton, NgIf]
 })
 export class LoginComponent {
