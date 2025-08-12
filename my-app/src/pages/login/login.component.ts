@@ -5,11 +5,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButton, NgIf]
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButton, NgIf, RouterLink]
 })
 export class LoginComponent {
     username: string = "Helmut"
@@ -20,7 +21,7 @@ export class LoginComponent {
     }
 
     onUsernameChanged(event: Event) {
-        console.log(this.username)
+        // console.log(this.username)
     }
 
     onSubmit(form: NgForm) {

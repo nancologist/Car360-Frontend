@@ -1,5 +1,5 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input
             matInput
@@ -10,7 +10,7 @@
         />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
             matInput
@@ -21,6 +21,8 @@
     </mat-form-field>
 
     <button mat-flat-button type="submit">LOGIN</button>
+
+    <div class="alternative">or <a routerLink="/sign-up">create an account</a>!</div>
 
     <mat-error *ngIf="loginFailed">Log in failed, try again!</mat-error>
 </form>

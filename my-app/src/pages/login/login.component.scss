@@ -3,4 +3,13 @@ form {
     flex-direction: column;
     width: 400px;
     margin: 0 auto;
+    padding: 50px;
+
+    .alternative {
+        margin-top: 10px;
+
+        a {
+            text-decoration: underline;
+        }
+    }
 }

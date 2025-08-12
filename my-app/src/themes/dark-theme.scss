@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 
-$primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500);
+$primary: mat.m2-define-palette(mat.$m2-pink-palette, 300);
 $accent: mat.m2-define-palette(mat.$m2-cyan-palette, A200, A100, A400);
 $warn: mat.m2-define-palette(mat.$m2-red-palette);
 
@@ -30,33 +30,33 @@ body {
     margin: 0;
 }
 
-.mat-mdc-card {
-    background-color: #1e1e1e !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
+//.mat-mdc-card {
+//    background-color: #1e1e1e !important;
+//    border-radius: 12px !important;
+//    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+//}
 
-.mat-mdc-raised-button {
-    border-radius: 8px;
-    text-transform: none;
-    font-weight: 500;
-}
+//.mat-mdc-raised-button {
+//    border-radius: 8px;
+//    text-transform: none;
+//    font-weight: 500;
+//}
+//
+//.mat-mdc-button.mat-primary {
+//    background-color: mat.m2-get-color-from-palette($primary, 500);
+//    color: white;
+//}
+//
+//.mat-mdc-button.mat-accent {
+//    background-color: mat.m2-get-color-from-palette($accent, A200);
+//    color: black;
+//}
 
-.mat-mdc-button.mat-primary {
-    background-color: mat.m2-get-color-from-palette($primary, 500);
-    color: white;
-}
-
-.mat-mdc-button.mat-accent {
-    background-color: mat.m2-get-color-from-palette($accent, A200);
-    color: black;
-}
-
-.mat-mdc-form-field {
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    padding: 4px 8px;
-}
+//.mat-mdc-form-field {
+//    background-color: #2a2a2a;
+//    border-radius: 8px;
+//    padding: 4px 8px;
+//}
 
 .mat-mdc-input-element {
     color: #f5f5f5;

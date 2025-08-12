@@ -1,0 +1,8 @@
+.mat-mdc-form-field {
+    width: 400px;
+}
+
+// fixme: it does not work , still the background of autofill is white!
+input:-webkit-autofill {
+    background-color: inherit !important;
+}
