@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CardComponent} from "../../components/card/card.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {CarCard} from '../../shared';
-import {AppService} from '../../app/app.component.service';
+import {ApiService} from '../../app/api.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -18,11 +18,11 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
     carInfos: CarCard[] = [];
 
-    constructor(private appService: AppService, private router: Router) {
+    constructor(private apiService: ApiService, private router: Router) {
     }
 
     ngOnInit() {
-        this.appService.getCarInfos().subscribe(res => {
+        this.apiService.getCarInfos().subscribe(res => {
             this.carInfos = res;
         })
     }

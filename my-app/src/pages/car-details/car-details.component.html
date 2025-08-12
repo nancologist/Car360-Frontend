@@ -27,7 +27,7 @@
                 <div class="grid-item"><strong>Body Style:</strong> {{ car.bodyStyleCode }}</div>
                 <div class="grid-item"><strong>Steering:</strong> {{ car.steering }}</div>
                 <img
-                    [src]="appService.getCarColorImageUrl(car.id ?? 0)"
+                    [src]="apiService.getCarColorImageUrl(car.id ?? 0)"
                     alt="Base64 Image"
                     (error)="onColorImageError($event)"
                     width="100"

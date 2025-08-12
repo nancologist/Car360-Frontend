@@ -1,5 +1,5 @@
 import {Component, DestroyRef, OnInit} from '@angular/core';
-import {AppService} from '../../app/app.component.service';
+import {ApiService} from '../../app/api.service';
 import {Car} from '../../shared';
 import {ActivatedRoute} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
@@ -29,7 +29,7 @@ export class CarDetailsComponent implements OnInit {
     errMsg: String | null = null;
 
     constructor(
-        public appService: AppService,
+        public apiService: ApiService,
         private route: ActivatedRoute,
         private destroyRef: DestroyRef
     ) {
@@ -37,7 +37,7 @@ export class CarDetailsComponent implements OnInit {
 
     ngOnInit() {
         const carId = +(this.route.snapshot.params as { id: string }).id;
-        this.appService
+        this.apiService
             .getCarById(carId)
             .pipe(
                 takeUntilDestroyed(this.destroyRef),

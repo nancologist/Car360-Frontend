@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
-import {AppService} from '../../app/app.component.service';
+import {ApiService} from '../../app/api.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
@@ -17,7 +17,7 @@ export class LoginComponent {
     password: string = "123"
     loginFailed = false;
 
-    constructor(private appService: AppService) {
+    constructor(private apiService: ApiService) {
     }
 
     onUsernameChanged(event: Event) {
@@ -25,7 +25,7 @@ export class LoginComponent {
     }
 
     onSubmit(form: NgForm) {
-        // this.appService.postLogin(form.value).subscribe((res) => {
+        // this.apiService.postLogin(form.value).subscribe((res) => {
         //
         // })
     }
