@@ -5,3 +5,4 @@ export type Car = components["schemas"]["CarDto"];
 export type Equipment = components["schemas"]["Equipment"];
 export type Color = components["schemas"]["ColorDto"];
 export type Upholstery = components["schemas"]["Upholstery"];
+export type SignupRequest = components["schemas"]["SignupRequest"];

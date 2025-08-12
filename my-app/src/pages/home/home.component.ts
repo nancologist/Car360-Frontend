@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CardComponent} from "../../components/card/card.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {CarCard} from '../../shared';
-import {ApiService} from '../../app/api.service';
+import {ApiService} from '../../api/api.service';
 import {Router} from '@angular/router';
 
 @Component({

@@ -9,6 +9,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {InputComponent} from '../../components/input/input.component';
 import {MatButton} from '@angular/material/button';
 import {passwordMatchValidator} from './validator';
+import {ApiService} from '../../api/api.service';
+import {SignupRequest} from '../../shared';
 
 // Todo: add verification for email
 // todo: add verification that password is repeated correctly
@@ -46,13 +48,27 @@ export class SignupComponent {
         })
     }, {validators: passwordMatchValidator});
 
+    constructor(private apiService: ApiService) {
+    }
+
     onSubmit() {
-        if (this.signupForm.invalid) {
-            // Todo: add the list of errors or add error to each field so user understand which input is wrong.
+        if (this.signupForm.invalid
+            || this.signupForm.value.username === undefined
+            || this.signupForm.value.email === undefined
+            || this.signupForm.value.password === undefined
+        ) {
+            // Todo: add the list of errors or add error to each field so user
+            // understands which input is wrong.
             alert("Form invalid, please adjust your input!");
             return;
         }
 
-        console.log(this.signupForm.value)
+        const data: SignupRequest = {
+            username: this.signupForm.value.username,
+            email: this.signupForm.value.email,
+            password: this.signupForm.value.password
+        }
+
+        this.apiService.signUpUser(data)
     }
 }

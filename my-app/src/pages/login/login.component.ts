@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
-import {ApiService} from '../../app/api.service';
+import {ApiService} from '../../api/api.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
