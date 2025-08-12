@@ -11,6 +11,9 @@ import {MatButton} from '@angular/material/button';
 import {passwordMatchValidator} from './validator';
 import {ApiService} from '../../api/api.service';
 import {SignupRequest} from '../../shared';
+import {Router} from '@angular/router';
+import {requestWithLoadingAndError} from '../../api/helper';
+import {filter} from 'rxjs';
 
 // Todo: add verification for email
 // todo: add verification that password is repeated correctly
@@ -48,7 +51,7 @@ export class SignupComponent {
         })
     }, {validators: passwordMatchValidator});
 
-    constructor(private apiService: ApiService) {
+    constructor(private apiService: ApiService, private router: Router) {
     }
 
     onSubmit() {
@@ -69,6 +72,15 @@ export class SignupComponent {
             password: this.signupForm.value.password
         }
 
-        this.apiService.signUpUser(data)
+        requestWithLoadingAndError(this.apiService.signUpUser(data))
+            .pipe(filter(res => !res.loading))
+            .subscribe((res) => {
+                if (res.errMsg) {
+                    alert(res.errMsg)
+                    return;
+                }
+                alert('Your account is created, now you can log in!')
+                this.router.navigate(['/login'])
+            },);
     }
 }
