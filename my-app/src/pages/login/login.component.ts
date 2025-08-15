@@ -4,18 +4,17 @@ import {ApiService} from '../../api/api.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {LoginRequest} from '../../shared';
 
 @Component({
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButton, NgIf, RouterLink]
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButton, RouterLink]
 })
 export class LoginComponent {
-    username: string = "Helmut"
-    password: string = "123"
-    loginFailed = false;
+    username = ""
+    password = ""
 
     constructor(private apiService: ApiService) {
     }
@@ -25,8 +24,12 @@ export class LoginComponent {
     }
 
     onSubmit(form: NgForm) {
-        // this.apiService.postLogin(form.value).subscribe((res) => {
-        //
-        // })
+        const data: LoginRequest = {
+            username: form.value.username,
+            password: form.value.password
+        }
+        this.apiService.login(data).subscribe(res => {
+            console.log(res);
+        })
     }
 }

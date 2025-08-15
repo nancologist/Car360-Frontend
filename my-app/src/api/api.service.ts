@@ -1,6 +1,12 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Car, CarCard, SignupRequest} from '../shared';
+import {
+    Car,
+    CarCard,
+    LoginRequest,
+    LoginResponse,
+    SignupRequest
+} from '../shared';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -26,5 +32,10 @@ export class ApiService {
 
     signUpUser(signupRequest: SignupRequest) {
         return this.http.post<null>(ApiService.BASE_URL + '/auth/signup', signupRequest)
+    }
+
+    login(loginRequest: LoginRequest) {
+        return this.http.post<LoginResponse>(
+            ApiService.BASE_URL + '/auth/login', loginRequest);
     }
 }
