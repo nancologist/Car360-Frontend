@@ -12,7 +12,7 @@ export const globalErrorInterceptor: HttpInterceptorFn = (req: HttpRequest<unkno
         catchError((error: HttpErrorResponse) => {
             let userMessage = '';
 
-            if (error.error.message) {
+            if (error.error?.message) {
                 userMessage = error.error.message
             } else {
                 switch (error.status) {

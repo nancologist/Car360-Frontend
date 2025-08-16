@@ -4,8 +4,8 @@ import {ApiService} from '../../api/api.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import {RouterLink} from '@angular/router';
-import {LoginRequest} from '../../shared';
+import {Router, RouterLink} from '@angular/router';
+import {LoginRequest, LoginResponse} from '../../shared';
 import {TokenService} from '../../services/token.service';
 
 @Component({
@@ -17,16 +17,21 @@ export class LoginComponent {
     username = ""
     password = ""
 
-    constructor(private apiService: ApiService, private tokenService: TokenService) {
+    constructor(
+        private apiService: ApiService,
+        private tokenService: TokenService,
+        private router: Router
+    ) {
     }
 
     onSubmit(form: NgForm) {
         const data: LoginRequest = {
             username: form.value.username,
             password: form.value.password
-        }
-        this.apiService.login(data).subscribe(res => {
-            console.log(res);
-        })
+        };
+        this.apiService.login(data).subscribe((res: LoginResponse) => {
+            this.tokenService.setToken(res.token);
+            this.router.navigate(['/'])
+        });
     }
 }

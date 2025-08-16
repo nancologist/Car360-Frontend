@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {
-    private jwt: string | undefined;
+    private token: string | undefined;
 
-    getJwt() {
-        return this.jwt;
+    getToken() {
+        return this.token;
     }
 
-    setJwt(token: string) {
-        this.jwt = token;
+    setToken(token: string) {
+        this.token = token;
     }
 }
