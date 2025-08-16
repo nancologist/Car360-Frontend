@@ -6,6 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
 import {LoginRequest} from '../../shared';
+import {TokenService} from '../../services/token.service';
 
 @Component({
     templateUrl: './login.component.html',
@@ -16,11 +17,7 @@ export class LoginComponent {
     username = ""
     password = ""
 
-    constructor(private apiService: ApiService) {
-    }
-
-    onUsernameChanged(event: Event) {
-        // console.log(this.username)
+    constructor(private apiService: ApiService, private tokenService: TokenService) {
     }
 
     onSubmit(form: NgForm) {
