@@ -98,48 +98,48 @@ export interface components {
             password: string;
         };
         LoginResponse: {
-            token?: string;
+            token: string;
             /** Format: int64 */
-            userId?: number;
-            username?: string;
-            email?: string;
+            userId: number;
+            username: string;
+            email: string;
         };
         CarThumbnailDto: {
             /** Format: int64 */
-            carId?: number;
-            name?: string;
-            productionDate?: string;
-            color?: string;
+            carId: number;
+            name: string;
+            productionDate: string;
+            color: string;
         };
         CarDto: {
             /** Format: int64 */
-            id?: number;
-            vin?: string;
-            manufacturer?: string;
-            model?: string;
-            bodyStyleCode?: string;
-            steering?: string;
-            facelift?: boolean;
+            id: number;
+            vin: string;
+            manufacturer: string;
+            model: string;
+            bodyStyleCode: string;
+            steering: string;
+            facelift: boolean;
             /** Format: date-time */
-            productionDate?: string;
-            colorDto?: components["schemas"]["ColorDto"];
-            upholstery?: components["schemas"]["Upholstery"];
+            productionDate: string;
+            colorDto: components["schemas"]["ColorDto"];
+            upholstery: components["schemas"]["Upholstery"];
             /** Format: int32 */
-            powerInKw?: number;
+            powerInKw: number;
             /** Format: float */
-            displacementInLiter?: number;
+            displacementInLiter: number;
             /** Format: int32 */
-            doorsCount?: number;
-            transmission?: string;
-            drive?: string;
-            equipments?: components["schemas"]["Equipment"][];
+            doorsCount: number;
+            transmission: string;
+            drive: string;
+            equipments: components["schemas"]["Equipment"][];
         };
         ColorDto: {
             /** Format: int64 */
-            id?: number;
-            code?: string;
-            name?: string;
-            manufacturer?: string;
+            id: number;
+            code: string;
+            name: string;
+            manufacturer: string;
         };
         Equipment: {
             /** Format: int64 */
