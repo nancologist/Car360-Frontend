@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {CarCard} from '../../shared';
 import {ApiService} from '../../api/api.service';
 import {Router} from '@angular/router';
+import {TokenService} from '../../services/token.service';
 
 @Component({
     selector: 'app-home',
@@ -18,13 +19,23 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
     carInfos: CarCard[] = [];
 
-    constructor(private apiService: ApiService, private router: Router) {
+    constructor(
+        private apiService: ApiService,
+        private router: Router,
+        private tokenService: TokenService
+    ) {
     }
 
     ngOnInit() {
-        this.apiService.getCarInfos().subscribe(res => {
-            this.carInfos = res;
-        })
+
+        if (this.tokenService.getToken()) {
+            this.apiService.getCarInfos().subscribe(res => {
+                this.carInfos = res;
+            })
+        }
+
+        // TODO NEXT: Now you should intercept your requests (non-public
+        //  ones) and add token to their headers
     }
 
     trackByCarId(index: number, carInfo: CarCard) {
