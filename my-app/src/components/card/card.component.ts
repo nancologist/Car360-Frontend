@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {CarCard} from '../../shared';
-import {DatePipe, NgIf, NgOptimizedImage} from '@angular/common';
+import {DatePipe, NgIf, TitleCasePipe} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-card',
-    imports: [MatCardModule, NgOptimizedImage, NgIf, MatButtonModule, DatePipe],
+    imports: [MatCardModule, NgIf, MatButtonModule, DatePipe, TitleCasePipe],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })

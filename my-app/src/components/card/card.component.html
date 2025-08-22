@@ -13,9 +13,9 @@
         <div
             class="title"
         >
-            <h3>{{car.name}}</h3>
-            <span>{{ car.productionDate | date }}</span>
-            <p>{{ car.color }}</p>
+            <h3>{{ car.name }}</h3>
+            <div class="subtitle">Produced on {{ car.productionDate | date }}</div>
+            <div class="subtitle">{{ car.color | titlecase }}</div>
         </div>
     </div>
 
