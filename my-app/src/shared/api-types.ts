@@ -36,6 +36,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/equipments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["searchEquipments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/cars": {
         parameters: {
             query?: never;
@@ -98,11 +114,17 @@ export interface components {
             password: string;
         };
         LoginResponse: {
-            token: string;
+            token?: string;
             /** Format: int64 */
-            userId: number;
-            username: string;
-            email: string;
+            userId?: number;
+            username?: string;
+            email?: string;
+        };
+        EquipmentDto: {
+            /** Format: int64 */
+            id: number;
+            code: string;
+            description: string;
         };
         CarThumbnailDto: {
             /** Format: int64 */
@@ -211,9 +233,33 @@ export interface operations {
             };
         };
     };
+    searchEquipments: {
+        parameters: {
+            query: {
+                search: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["EquipmentDto"][];
+                };
+            };
+        };
+    };
     getCarThumbnails: {
         parameters: {
-            query?: never;
+            query?: {
+                equipmentCodes?: string[];
+            };
             header?: never;
             path?: never;
             cookie?: never;

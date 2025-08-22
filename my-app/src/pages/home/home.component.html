@@ -1,11 +1,17 @@
 <div class="home">
-    <div class="car-grid">
-        <app-card
-            *ngFor="let carInfo of carInfos; trackBy: trackByCarId"
-            [car]="carInfo"
+
+    <div class="filter-container">
+        <app-filter></app-filter>
+    </div>
+
+    <div *ngIf="carThumbnails$ | async as carThumbnails" class="car-container">
+        <app-car-card
             (cardClicked)="onCardClicked($event)"
+            *ngFor="let carInfo of carThumbnails; trackBy: trackByCarId"
+            [car]="carInfo"
         />
-        <p *ngIf="carInfos.length === 0">No cars available at the moment.</p>
+        <p *ngIf="carThumbnails === null && carThumbnailsLoading">Loading car infos...</p>
+        <p *ngIf="carThumbnails !== null && carThumbnails.length === 0">No cars in the result</p>
     </div>
 
 </div>

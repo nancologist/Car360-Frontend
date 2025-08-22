@@ -1,0 +1,16 @@
+.mat-mdc-card {
+    margin-top: 10px;
+    padding: 10px;
+
+    form {
+        padding: 10px;
+
+        > * {
+            margin-bottom: 20px;
+        }
+
+        ::ng-deep .app-input-chip {
+            width: 100%;
+        }
+    }
+}

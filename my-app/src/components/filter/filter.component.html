@@ -1,0 +1,10 @@
+<mat-card>
+    <form [formGroup]="filterForm">
+        <div class="info">Results: {{ resultCount$ | async }}</div>
+        <app-input-chip
+            (selectedEquipmentsUpdated)="filterEquipments($event)"
+            [equipments]="(equipments$ | async)?.data ?? []"
+            formControlName="searchEquipment"
+        ></app-input-chip>
+    </form>
+</mat-card>

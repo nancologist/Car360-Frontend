@@ -1,14 +1,14 @@
-import {Component, DestroyRef, OnInit} from '@angular/core';
-import {ApiService} from '../../api/api.service';
-import {Car} from '../../shared';
-import {ActivatedRoute} from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
-import {MatListModule} from '@angular/material/list';
-import {MatIcon} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {catchError} from 'rxjs';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { ApiService } from '../../api/api.service';
+import { CarDto } from '../../shared';
+import { ActivatedRoute } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError } from 'rxjs';
 
 @Component({
     selector: 'app-car-details',
@@ -25,7 +25,7 @@ import {catchError} from 'rxjs';
     styleUrl: './car-details.component.scss'
 })
 export class CarDetailsComponent implements OnInit {
-    car: Car | null = null;
+    car: CarDto | null = null;
     errMsg: String | null = null;
 
     constructor(
@@ -46,7 +46,7 @@ export class CarDetailsComponent implements OnInit {
                     return caught;
                 })
             )
-            .subscribe((car: Car) => {
+            .subscribe((car: CarDto) => {
                 this.car = car;
             });
     }

@@ -1,44 +1,52 @@
-import {Component, OnInit} from '@angular/core';
-import {CardComponent} from "../../components/card/card.component";
-import {NgForOf, NgIf} from "@angular/common";
-import {CarCard} from '../../shared';
-import {ApiService} from '../../api/api.service';
-import {Router} from '@angular/router';
-import {TokenService} from '../../services/token.service';
+import { Component, OnInit } from '@angular/core';
+import { CarCardComponent } from "../../components/card/car-card.component";
+import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
+import { CarThumbnailDto } from '../../shared';
+import { ApiService } from '../../api/api.service';
+import { Router } from '@angular/router';
+import { Observable, of, tap } from 'rxjs';
+import { FilterComponent } from '../../components/filter/filter.component';
+import { Store } from '@ngrx/store';
+import { CarsActions } from '../../store/cars/cars.actions';
+import { CarsSelectors } from '../../store/cars/cars.selectors';
+
 
 @Component({
     selector: 'app-home',
     imports: [
-        CardComponent,
+        CarCardComponent,
         NgForOf,
-        NgIf
+        NgIf,
+        AsyncPipe,
+        FilterComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-    carInfos: CarCard[] = [];
+    carThumbnailsLoading: boolean = false;
+    carThumbnails$: Observable<CarThumbnailDto[] | null> = of(null);
 
     constructor(
         private apiService: ApiService,
         private router: Router,
-        private tokenService: TokenService
+        private store: Store
     ) {
     }
 
     ngOnInit() {
-
-        if (this.tokenService.getToken()) {
-            this.apiService.getCarInfos().subscribe(res => {
-                this.carInfos = res;
+        this.apiService.getCarInfos().pipe(
+            tap(() => {
+                this.carThumbnailsLoading = true;
             })
-        }
-
-        // TODO NEXT: Now you should intercept your requests (non-public
-        //  ones) and add token to their headers
+        ).subscribe((data: CarThumbnailDto[]) => {
+            this.store.dispatch(CarsActions.updateCarThumbnails({ data }))
+            this.carThumbnailsLoading = false;
+        })
+        this.carThumbnails$ = this.store.select(CarsSelectors.selectCarThumbnails);
     }
 
-    trackByCarId(index: number, carInfo: CarCard) {
+    trackByCarId(index: number, carInfo: CarThumbnailDto) {
         return carInfo.carId;
     }
 

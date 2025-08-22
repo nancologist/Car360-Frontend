@@ -1,12 +1,18 @@
 .home {
+    align-items: start;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     min-height: 100vh; /* Ensure the container takes at least the full viewport height */
 }
 
-.car-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid with minimum width of 300px */
-    gap: 16px;
-    padding: 16px;
+.filter-container {
+    width: 30%;
+}
+
+.car-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
 }

@@ -1,0 +1,39 @@
+<mat-form-field appearance="outline" class="app-input-chip">
+
+    <mat-label>Equipments</mat-label>
+
+    <mat-chip-grid #chipGrid aria-label="Equipments selection">
+        <input
+            (input)="onInput($event)"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipGrid"
+            [value]="value"
+            matInput
+            placeholder="Search equipments..."
+            type="text"
+        />
+            <!-- A matChip Even of Input element, we may not need it, because we only allow adding items from options not any input : -->
+            <!-- (matChipInputTokenEnd)="add($event, selectedEquipments)"-->
+        <div class="chips-container">
+            <mat-chip-row
+                (removed)="remove(equipment)"
+                *ngFor="let equipment of selectedEquipments"
+            >
+                ({{ equipment.code }}) {{ equipment.description }}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+        </div>
+    </mat-chip-grid>
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option
+            *ngFor="let equipment of equipments"
+            [value]="equipment"
+        >
+            ({{ equipment.code }}) {{ equipment.description }}
+        </mat-option>
+    </mat-autocomplete>
+
+</mat-form-field>

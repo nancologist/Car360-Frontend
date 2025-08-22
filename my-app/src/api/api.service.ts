@@ -1,13 +1,14 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import {
-    Car,
-    CarCard,
+    CarDto,
+    CarThumbnailDto,
+    EquipmentDto,
     LoginRequest,
     LoginResponse,
     SignupRequest
 } from '../shared';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -18,16 +19,21 @@ export class ApiService {
     constructor(private http: HttpClient) {
     }
 
-    getCarInfos(): Observable<CarCard[]> {
-        return this.http.get<CarCard[]>(ApiService.BASE_URL + '/cars')
+    getCarInfos(): Observable<CarThumbnailDto[]> {
+        return this.http.get<CarThumbnailDto[]>(ApiService.BASE_URL + '/cars')
     }
 
-    getCarById(id: number): Observable<Car> {
-        return this.http.get<Car>(ApiService.BASE_URL + `/cars/${id}`)
+    getCarById(id: number): Observable<CarDto> {
+        return this.http.get<CarDto>(ApiService.BASE_URL + `/cars/${id}`)
     }
 
     getCarColorImageUrl(carId: number) {
         return `${ApiService.BASE_URL}/cars/${carId}/color-image`;
+    }
+
+    filterCarsByEquipment(equipmentCodes: string[]) {
+        let params = new HttpParams({ fromObject: { equipmentCodes } });
+        return this.http.get<CarThumbnailDto[]>(ApiService.BASE_URL + '/cars', { params })
     }
 
     signUpUser(signupRequest: SignupRequest) {
@@ -37,5 +43,9 @@ export class ApiService {
     login(loginRequest: LoginRequest) {
         return this.http.post<LoginResponse>(
             ApiService.BASE_URL + '/auth/login', loginRequest);
+    }
+
+    searchEquipments(search: string) {
+        return this.http.get<EquipmentDto[]>(ApiService.BASE_URL + `/equipments?search=${search}`)
     }
 }

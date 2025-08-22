@@ -1,0 +1,29 @@
+<mat-card
+    *ngIf="car"
+    class="car-card"
+>
+    <div class="card-header">
+        <img
+            [height]="128"
+            [width]="128"
+            alt="{{ car.name }}"
+            mat-card-image
+            src="assets/images/bmw-f11.jpeg"
+        >
+        <div
+            class="title"
+        >
+            <h3>{{ car.name }}</h3>
+            <div class="subtitle">Produced on {{ car.productionDate | date }}</div>
+            <div class="subtitle">{{ car.color | titlecase }}</div>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <button
+            (click)="viewCarDetails(car.carId)"
+            mat-button
+        >View Details
+        </button>
+    </div>
+</mat-card>
