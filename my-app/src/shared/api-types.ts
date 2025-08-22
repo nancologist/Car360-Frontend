@@ -98,11 +98,11 @@ export interface components {
             password: string;
         };
         LoginResponse: {
-            token: string;
+            token?: string;
             /** Format: int64 */
-            userId: number;
-            username: string;
-            email: string;
+            userId?: number;
+            username?: string;
+            email?: string;
         };
         CarThumbnailDto: {
             /** Format: int64 */

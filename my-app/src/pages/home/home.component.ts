@@ -27,15 +27,9 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        if (this.tokenService.getToken()) {
-            this.apiService.getCarInfos().subscribe(res => {
-                this.carInfos = res;
-            })
-        }
-
-        // TODO NEXT: Now you should intercept your requests (non-public
-        //  ones) and add token to their headers
+        this.apiService.getCarInfos().subscribe(res => {
+            this.carInfos = res;
+        })
     }
 
     trackByCarId(index: number, carInfo: CarCard) {

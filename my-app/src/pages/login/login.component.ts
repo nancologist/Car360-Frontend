@@ -5,7 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {Router, RouterLink} from '@angular/router';
-import {LoginRequest, LoginResponse} from '../../shared';
+import {LoginRequest} from '../../shared';
 import {TokenService} from '../../services/token.service';
 
 @Component({
@@ -29,9 +29,11 @@ export class LoginComponent {
             username: form.value.username,
             password: form.value.password
         };
-        this.apiService.login(data).subscribe((res: LoginResponse) => {
-            this.tokenService.setToken(res.token);
-            this.router.navigate(['/'])
-        });
+        // LoginResponse in backend has the according type inside the
+        // feature branch.
+        // this.apiService.login(data).subscribe((res: LoginResponse) => {
+        //     this.tokenService.setToken(res.token);
+        //     this.router.navigate(['/'])
+        // });
     }
 }
