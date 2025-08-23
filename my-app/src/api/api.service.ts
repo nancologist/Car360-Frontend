@@ -2,7 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {
     Car,
-    CarCard,
+    CarThumbnail,
     LoginRequest,
     LoginResponse,
     SignupRequest
@@ -18,8 +18,8 @@ export class ApiService {
     constructor(private http: HttpClient) {
     }
 
-    getCarInfos(): Observable<CarCard[]> {
-        return this.http.get<CarCard[]>(ApiService.BASE_URL + '/cars')
+    getCarInfos(): Observable<CarThumbnail[]> {
+        return this.http.get<CarThumbnail[]>(ApiService.BASE_URL + '/cars')
     }
 
     getCarById(id: number): Observable<Car> {

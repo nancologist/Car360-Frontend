@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CardComponent} from "../../components/card/card.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {CarCard} from '../../shared';
+import {CarThumbnail} from '../../shared';
 import {ApiService} from '../../api/api.service';
 import {Router} from '@angular/router';
 import {TokenService} from '../../services/token.service';
@@ -17,7 +17,7 @@ import {TokenService} from '../../services/token.service';
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-    carInfos: CarCard[] = [];
+    carThumbnails: CarThumbnail[] = [];
 
     constructor(
         private apiService: ApiService,
@@ -28,11 +28,11 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.apiService.getCarInfos().subscribe(res => {
-            this.carInfos = res;
+            this.carThumbnails = res;
         })
     }
 
-    trackByCarId(index: number, carInfo: CarCard) {
+    trackByCarId(index: number, carInfo: CarThumbnail) {
         return carInfo.carId;
     }
 

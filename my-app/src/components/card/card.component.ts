@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
-import {CarCard} from '../../shared';
+import {CarThumbnail} from '../../shared';
 import {DatePipe, NgIf, TitleCasePipe} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 
@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-    @Input() car?: CarCard;
+    @Input() car?: CarThumbnail;
     @Output() cardClicked = new EventEmitter<number>();
 
     viewCarDetails(carId: number | undefined) {

@@ -1,6 +1,6 @@
 import {components} from './api-types';
 
-export type CarCard = components["schemas"]["CarThumbnailDto"];
+export type CarThumbnail = components["schemas"]["CarThumbnailDto"];
 export type Car = components["schemas"]["CarDto"];
 export type Equipment = components["schemas"]["Equipment"];
 export type Color = components["schemas"]["ColorDto"];
