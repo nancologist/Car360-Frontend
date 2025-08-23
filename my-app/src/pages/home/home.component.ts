@@ -1,23 +1,30 @@
 import {Component, OnInit} from '@angular/core';
 import {CardComponent} from "../../components/card/card.component";
-import {NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {CarThumbnail} from '../../shared';
 import {ApiService} from '../../api/api.service';
 import {Router} from '@angular/router';
 import {TokenService} from '../../services/token.service';
+import {map, Observable, of, startWith} from 'rxjs';
+
+type CarThumbnailsState = { data: CarThumbnail[] | null, loading: boolean };
 
 @Component({
     selector: 'app-home',
     imports: [
         CardComponent,
         NgForOf,
-        NgIf
+        NgIf,
+        AsyncPipe
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-    carThumbnails: CarThumbnail[] = [];
+    carThumbnailsState$: Observable<CarThumbnailsState> = of({
+        data: null,
+        loading: false
+    });
 
     constructor(
         private apiService: ApiService,
@@ -27,9 +34,10 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.apiService.getCarInfos().subscribe(res => {
-            this.carThumbnails = res;
-        })
+        this.carThumbnailsState$ = this.apiService.getCarInfos().pipe(
+            map(data => ({data, loading: false})),
+            startWith({data: null, loading: true})
+        )
     }
 
     trackByCarId(index: number, carInfo: CarThumbnail) {
