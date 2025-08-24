@@ -8,3 +8,4 @@ export type Upholstery = components["schemas"]["Upholstery"];
 export type SignupRequest = components["schemas"]["SignupRequest"];
 export type LoginRequest = components["schemas"]["LoginRequest"];
 export type LoginResponse = components["schemas"]["LoginResponse"];
+export type EquipmentDto = components["schemas"]["EquipmentDto"];

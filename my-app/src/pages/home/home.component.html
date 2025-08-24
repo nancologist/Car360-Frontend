@@ -1,6 +1,11 @@
 <div class="home">
+
+    <div class="filter-container">
+        <app-filter></app-filter>
+    </div>
+
     <div class="car-container" *ngIf="carThumbnailsState$ | async as state">
-        <app-card
+        <app-car-card
             *ngFor="let carInfo of state.data; trackBy: trackByCarId"
             [car]="carInfo"
             (cardClicked)="onCardClicked($event)"

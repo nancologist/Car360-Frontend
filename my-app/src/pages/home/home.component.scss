@@ -1,7 +1,12 @@
 .home {
+    align-items: start;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+}
+
+.filter-container {
+    min-width: 20%;
 }
 
 .car-container {

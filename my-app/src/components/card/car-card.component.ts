@@ -5,13 +5,13 @@ import {DatePipe, NgIf, TitleCasePipe} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({
-  selector: 'app-card',
-    imports: [MatCardModule, NgIf, MatButtonModule, DatePipe, TitleCasePipe],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  selector: 'app-car-card',
+    imports: [MatCardModule, MatButtonModule, DatePipe, TitleCasePipe, NgIf],
+  templateUrl: './car-card.component.html',
+  styleUrl: './car-card.component.scss'
 })
-export class CardComponent {
-    @Input() car?: CarThumbnail;
+export class CarCardComponent {
+    @Input({ required: true }) car!: CarThumbnail;
     @Output() cardClicked = new EventEmitter<number>();
 
     viewCarDetails(carId: number | undefined) {

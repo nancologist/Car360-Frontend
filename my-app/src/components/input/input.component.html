@@ -1,11 +1,23 @@
 <mat-form-field appearance="outline">
     <mat-label>{{ name | titlecase }}</mat-label>
     <input
+        *ngIf="!matAuto"
         matInput
         [type]="type"
         [name]="name"
         [value]="value"
         (input)="onInput($event)"
         [autocomplete]="autocomplete"
-    />
+    >
+    <input
+        *ngIf="matAuto"
+        matInput
+        [type]="type"
+        [name]="name"
+        [value]="value"
+        (input)="onInput($event)"
+        [autocomplete]="autocomplete"
+        [matAutocomplete]="matAuto"
+    >
+    <ng-content></ng-content>
 </mat-form-field>

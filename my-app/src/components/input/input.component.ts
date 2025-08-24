@@ -1,7 +1,15 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
-import {TitleCasePipe} from '@angular/common';
+import {
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    ReactiveFormsModule
+} from '@angular/forms';
+import {NgIf, TitleCasePipe} from '@angular/common';
+import {
+    MatAutocomplete,
+    MatAutocompleteTrigger
+} from '@angular/material/autocomplete';
 
 @Component({
     selector: 'app-input',
@@ -11,7 +19,9 @@ import {TitleCasePipe} from '@angular/common';
         MatLabel,
         ReactiveFormsModule,
         MatFormField,
-        TitleCasePipe
+        TitleCasePipe,
+        MatAutocompleteTrigger,
+        NgIf
     ],
     templateUrl: './input.component.html',
     styleUrl: './input.component.scss',
@@ -32,6 +42,9 @@ export class InputComponent implements ControlValueAccessor {
 
     @Input()
     autocomplete: 'on' | 'off' | 'new-password' = 'on';
+
+    @Input()
+    matAuto?: MatAutocomplete;
 
     value: any = '';
     isDisabled: boolean = false;

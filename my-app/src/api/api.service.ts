@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {
     Car,
     CarThumbnail,
+    EquipmentDto,
     LoginRequest,
     LoginResponse,
     SignupRequest
@@ -37,5 +38,9 @@ export class ApiService {
     login(loginRequest: LoginRequest) {
         return this.http.post<LoginResponse>(
             ApiService.BASE_URL + '/auth/login', loginRequest);
+    }
+
+    searchEquipments(search: string) {
+        return this.http.get<EquipmentDto[]>(ApiService.BASE_URL + `/equipments?search=${search}`)
     }
 }
