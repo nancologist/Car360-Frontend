@@ -1,0 +1,16 @@
+<mat-card>
+    <form [formGroup]="filterForm">
+        <app-input
+            name="equipments"
+            formControlName="searchEquipment"
+            [matAuto]="auto"
+        >
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                    *ngFor="let equipment of (equipments$ | async)?.data"
+                    [value]="equipment.id"
+                >({{equipment.code}}) {{equipment.description}}</mat-option>
+            </mat-autocomplete>
+        </app-input>
+    </form>
+</mat-card>
