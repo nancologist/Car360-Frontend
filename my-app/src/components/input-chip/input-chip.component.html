@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" class="app-input-chip">
 
     <mat-label>Equipments</mat-label>
-    
+
     <mat-chip-grid #chipGrid aria-label="Equipments selection">
         <input
             (input)="onInput($event)"
@@ -19,7 +19,7 @@
                 (removed)="remove(equipment)"
                 *ngFor="let equipment of selectedEquipments"
             >
-                {{ equipment.code }}
+                ({{ equipment.code }}) {{ equipment.description }}
                 <button matChipRemove>
                     <mat-icon>cancel</mat-icon>
                 </button>

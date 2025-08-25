@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {
     Car,
@@ -29,6 +29,11 @@ export class ApiService {
 
     getCarColorImageUrl(carId: number) {
         return `${ApiService.BASE_URL}/cars/${carId}/color-image`;
+    }
+
+    filterCarsByEquipment(equipmentCodes: string[]) {
+        let params = new HttpParams({fromObject: {equipmentCodes}});
+        return this.http.get<CarThumbnail[]>(ApiService.BASE_URL + '/cars', {params})
     }
 
     signUpUser(signupRequest: SignupRequest) {

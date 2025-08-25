@@ -42,7 +42,8 @@ export class FilterComponent implements OnInit {
     }
 
     filterEquipments(equipments: EquipmentDto[]) {
-
+        const equipmentCodes = equipments.map(e => e.code);
+        this.apiService.filterCarsByEquipment(equipmentCodes)
     }
 
     private setupEquipmentSearch() {
