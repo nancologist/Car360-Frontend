@@ -36,7 +36,7 @@ import {EquipmentDto} from '../../shared';
         NgForOf,
         MatLabel,
         MatInput,
-        TitleCasePipe
+        TitleCasePipe,
     ],
     templateUrl: './input-chip.component.html',
     styleUrl: './input-chip.component.scss',
@@ -64,7 +64,7 @@ export class InputChipComponent implements ControlValueAccessor {
     isDisabled: boolean = false;
 
     remove(equipment: EquipmentDto) {
-        this.selectedEquipments = this.equipments.filter(equ => equ.id !== equipment.id);
+        this.selectedEquipments = this.selectedEquipments.filter(equ => equ.id !== equipment.id);
         this.selectedEquipmentsUpdated.emit(this.selectedEquipments);
     }
 
