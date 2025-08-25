@@ -70,11 +70,12 @@ export class InputChipComponent implements ControlValueAccessor {
 
     selected(event: MatAutocompleteSelectedEvent) {
         const { value: equipment } = event.option as MatOption<EquipmentDto>;
-        const isNew = this.selectedEquipments.findIndex(equ => equ.id === equipment.id) !== -1;
+        const isNew = this.selectedEquipments.findIndex(equ => equ.id === equipment.id) === -1;
         if (isNew) {
             this.selectedEquipments = [...this.selectedEquipments, equipment];
             this.selectedEquipmentsUpdated.emit(this.selectedEquipments);
         }
+        console.log(this.selectedEquipments)
     }
 
     // Called when parent form writes a value to the component

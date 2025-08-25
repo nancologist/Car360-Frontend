@@ -27,7 +27,7 @@
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option
             *ngFor="let equipment of equipments"
-            [value]="equipment.id"
+            [value]="equipment"
         >
             ({{ equipment.code }}) {{ equipment.description }}
         </mat-option>
