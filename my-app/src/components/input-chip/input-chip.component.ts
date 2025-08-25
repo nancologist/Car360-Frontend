@@ -5,22 +5,22 @@ import {
     Input,
     Output
 } from '@angular/core';
-import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
     ReactiveFormsModule
 } from '@angular/forms';
-import {NgForOf} from '@angular/common';
+import { NgForOf } from '@angular/common';
 import {
     MatAutocomplete,
     MatAutocompleteSelectedEvent,
     MatAutocompleteTrigger,
     MatOption
 } from '@angular/material/autocomplete';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIcon} from '@angular/material/icon';
-import {EquipmentDto} from '../../shared';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIcon } from '@angular/material/icon';
+import { EquipmentDto } from '../../shared';
 
 @Component({
     selector: 'app-input-chip',
@@ -50,7 +50,7 @@ import {EquipmentDto} from '../../shared';
 })
 export class InputChipComponent implements ControlValueAccessor {
 
-    @Input({required: true})
+    @Input({ required: true })
     equipments!: EquipmentDto[];
 
     @Output()

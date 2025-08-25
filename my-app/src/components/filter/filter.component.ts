@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {MatCard} from '@angular/material/card';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {AsyncPipe} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatCard } from '@angular/material/card';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
 import {
     debounceTime,
     distinctUntilChanged,
@@ -11,9 +11,9 @@ import {
     startWith,
     switchMap
 } from 'rxjs';
-import {EquipmentDto} from '../../shared';
-import {ApiService} from '../../api/api.service';
-import {InputChipComponent} from '../input-chip/input-chip.component';
+import { EquipmentDto } from '../../shared';
+import { ApiService } from '../../api/api.service';
+import { InputChipComponent } from '../input-chip/input-chip.component';
 
 @Component({
   selector: 'app-filter',
@@ -43,7 +43,7 @@ export class FilterComponent implements OnInit {
 
     filterEquipments(equipments: EquipmentDto[]) {
         const equipmentCodes = equipments.map(e => e.code);
-        this.apiService.filterCarsByEquipment(equipmentCodes)
+        this.apiService.filterCarsByEquipment(equipmentCodes).subscribe(res => console.log(res))
     }
 
     private setupEquipmentSearch() {

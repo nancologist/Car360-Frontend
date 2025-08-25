@@ -1,5 +1,5 @@
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Injectable} from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import {
     Car,
     CarThumbnail,
@@ -8,7 +8,7 @@ import {
     LoginResponse,
     SignupRequest
 } from '../shared';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -32,8 +32,8 @@ export class ApiService {
     }
 
     filterCarsByEquipment(equipmentCodes: string[]) {
-        let params = new HttpParams({fromObject: {equipmentCodes}});
-        return this.http.get<CarThumbnail[]>(ApiService.BASE_URL + '/cars', {params})
+        let params = new HttpParams({ fromObject: { equipmentCodes } });
+        return this.http.get<CarThumbnail[]>(ApiService.BASE_URL + '/cars', { params })
     }
 
     signUpUser(signupRequest: SignupRequest) {

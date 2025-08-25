@@ -1,9 +1,9 @@
 <mat-card>
     <form [formGroup]="filterForm">
         <app-input-chip
+            (selectedEquipmentsUpdated)="filterEquipments($event)"
             [equipments]="(equipments$ | async)?.data ?? []"
             formControlName="searchEquipment"
-            (selectedEquipmentsUpdated)="filterEquipments($event)"
         ></app-input-chip>
     </form>
 </mat-card>
