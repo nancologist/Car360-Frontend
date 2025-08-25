@@ -1,7 +1,6 @@
 <mat-card>
     <form [formGroup]="filterForm">
         <app-input-chip
-            name="equipments"
             [equipments]="(equipments$ | async)?.data ?? []"
             formControlName="searchEquipment"
         ></app-input-chip>

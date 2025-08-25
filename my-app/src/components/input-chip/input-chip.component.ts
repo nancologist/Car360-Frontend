@@ -11,7 +11,7 @@ import {
     NG_VALUE_ACCESSOR,
     ReactiveFormsModule
 } from '@angular/forms';
-import {NgForOf, TitleCasePipe} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {
     MatAutocomplete,
     MatAutocompleteSelectedEvent,
@@ -36,7 +36,7 @@ import {EquipmentDto} from '../../shared';
         NgForOf,
         MatLabel,
         MatInput,
-        TitleCasePipe,
+
     ],
     templateUrl: './input-chip.component.html',
     styleUrl: './input-chip.component.scss',
@@ -49,8 +49,6 @@ import {EquipmentDto} from '../../shared';
     ]
 })
 export class InputChipComponent implements ControlValueAccessor {
-    @Input({required: true})
-    name!: string;
 
     @Input({required: true})
     equipments!: EquipmentDto[];
@@ -75,7 +73,6 @@ export class InputChipComponent implements ControlValueAccessor {
             this.selectedEquipments = [...this.selectedEquipments, equipment];
             this.selectedEquipmentsUpdated.emit(this.selectedEquipments);
         }
-        console.log(this.selectedEquipments)
     }
 
     // Called when parent form writes a value to the component

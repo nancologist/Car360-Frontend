@@ -4,5 +4,9 @@
 
     form {
         padding: 10px;
+
+        ::ng-deep .app-input-chip {
+            width: 100%;
+        }
     }
 }
