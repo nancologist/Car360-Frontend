@@ -3,6 +3,7 @@
         <app-input-chip
             [equipments]="(equipments$ | async)?.data ?? []"
             formControlName="searchEquipment"
+            (selectedEquipmentsUpdated)="filterEquipments($event)"
         ></app-input-chip>
     </form>
 </mat-card>

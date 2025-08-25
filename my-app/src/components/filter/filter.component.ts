@@ -5,7 +5,6 @@ import {AsyncPipe} from '@angular/common';
 import {
     debounceTime,
     distinctUntilChanged,
-    filter,
     map,
     Observable,
     of,
@@ -39,18 +38,25 @@ export class FilterComponent implements OnInit {
         = of({ data: null, loading: false });
 
     ngOnInit() {
+        this.setupEquipmentSearch();
+    }
+
+    filterEquipments(equipments: EquipmentDto[]) {
+
+    }
+
+    private setupEquipmentSearch() {
         const equipmentControl = this.filterForm.get('searchEquipment')
         if (equipmentControl !== null) {
             this.equipments$ = equipmentControl.valueChanges
                 .pipe(
-                    filter(value => !!value && value?.trim().length >= 3),
                     debounceTime(300),
                     distinctUntilChanged(),
                     map(value => value?.toLowerCase().trim() ?? ''),
                     switchMap(search => this.apiService.searchEquipments(search))
                 ).pipe(
-                    map(data => ({ data, loading: false })),
-                    startWith({ data: null, loading: true })
+                    map(data => ({data, loading: false})),
+                    startWith({data: null, loading: true})
                 )
         }
     }
