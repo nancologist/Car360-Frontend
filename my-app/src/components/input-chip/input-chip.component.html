@@ -1,6 +1,18 @@
 <mat-form-field appearance="outline">
 
     <mat-chip-grid #chipGrid aria-label="Car selection">
+        <mat-label>{{ name | titlecase }}</mat-label>
+        <input
+            matInput
+            type="text"
+            [name]="name"
+            [value]="value"
+            (input)="onInput($event)"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipGrid"
+        />
+            <!-- A matChip Even of Input element, we may not need it, because we only allow adding items from options not any input : -->
+            <!-- (matChipInputTokenEnd)="add($event, selectedEquipments)"-->
         <mat-chip-row
             *ngFor="let equipment of selectedEquipments"
             (removed)="remove(equipment)"
@@ -10,14 +22,8 @@
                 <mat-icon>cancel</mat-icon>
             </button>
         </mat-chip-row>
-        <input
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipGrid"
-        />
-            <!-- A matChip Even of Input element, we may not need it, because we only allow adding items from options not any input : -->
-            <!-- (matChipInputTokenEnd)="add($event, selectedEquipments)"-->
-
     </mat-chip-grid>
+
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option
             *ngFor="let equipment of equipments"
@@ -26,16 +32,5 @@
             ({{ equipment.code }}) {{ equipment.description }}
         </mat-option>
     </mat-autocomplete>
-
-    <!--    <mat-label>{{ name | titlecase }}</mat-label>-->
-    <!--    <input-->
-    <!--        matInput-->
-    <!--        [type]="type"-->
-    <!--        [name]="name"-->
-    <!--        [value]="value"-->
-    <!--        (input)="onInput($event)"-->
-    <!--        [autocomplete]="autocomplete"-->
-    <!--        [matAutocomplete]="matAuto"-->
-    <!--    >-->
 
 </mat-form-field>

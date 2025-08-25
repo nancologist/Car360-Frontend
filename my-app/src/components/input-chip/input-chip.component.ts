@@ -5,25 +5,25 @@ import {
     Input,
     Output
 } from '@angular/core';
-import {MatFormField} from '@angular/material/input';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
     ReactiveFormsModule
 } from '@angular/forms';
-import {NgForOf} from '@angular/common';
+import {NgForOf, TitleCasePipe} from '@angular/common';
 import {
     MatAutocomplete,
     MatAutocompleteSelectedEvent,
     MatAutocompleteTrigger,
     MatOption
 } from '@angular/material/autocomplete';
-import {MatChipGrid, MatChipsModule} from '@angular/material/chips';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatIcon} from '@angular/material/icon';
 import {EquipmentDto} from '../../shared';
 
 @Component({
-    selector: 'app-input',
+    selector: 'app-input-chip',
     imports: [
         MatFormField,
         ReactiveFormsModule,
@@ -33,7 +33,10 @@ import {EquipmentDto} from '../../shared';
         MatIcon,
         MatAutocomplete,
         MatOption,
-        NgForOf
+        NgForOf,
+        MatLabel,
+        MatInput,
+        TitleCasePipe
     ],
     templateUrl: './input-chip.component.html',
     styleUrl: './input-chip.component.scss',
@@ -50,19 +53,7 @@ export class InputChipComponent implements ControlValueAccessor {
     name!: string;
 
     @Input({required: true})
-    matAuto!: MatAutocomplete;
-
-    @Input({required: true})
-    matChip!: MatChipGrid
-
-    @Input({required: true})
     equipments!: EquipmentDto[];
-
-    @Input()
-    type = 'text'
-
-    @Input()
-    autocomplete: 'on' | 'off' | 'new-password' = 'on';
 
     @Output()
     selectedEquipmentsUpdated = new EventEmitter<EquipmentDto[]>();

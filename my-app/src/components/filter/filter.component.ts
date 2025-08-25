@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatCard} from '@angular/material/card';
-import {InputComponent} from '../input/input.component';
-import {MatAutocomplete, MatOption} from '@angular/material/autocomplete';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {AsyncPipe, NgForOf} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {
     debounceTime,
     distinctUntilChanged,
@@ -16,17 +14,15 @@ import {
 } from 'rxjs';
 import {EquipmentDto} from '../../shared';
 import {ApiService} from '../../api/api.service';
+import {InputChipComponent} from '../input-chip/input-chip.component';
 
 @Component({
   selector: 'app-filter',
     imports: [
         MatCard,
-        InputComponent,
-        MatAutocomplete,
-        MatOption,
         ReactiveFormsModule,
         AsyncPipe,
-        NgForOf
+        InputChipComponent
     ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
