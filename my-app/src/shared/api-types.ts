@@ -136,7 +136,7 @@ export interface components {
         CarDto: {
             /** Format: int64 */
             id: number;
-            vin: string;
+            vinLast4: string;
             manufacturer: string;
             model: string;
             bodyStyleCode: string;
