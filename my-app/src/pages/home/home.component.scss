@@ -16,3 +16,24 @@
     flex-wrap: wrap;
     align-items: center;
 }
+
+.skeleton-card {
+    width: 92%;
+    margin: 10px;
+    padding: 20px;
+
+    height: 164px;
+    background: linear-gradient(90deg, #424242 25%, #787575 50%, #424242 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

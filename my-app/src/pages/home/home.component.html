@@ -4,14 +4,19 @@
         <app-filter></app-filter>
     </div>
 
-    <div *ngIf="carThumbnails$ | async as carThumbnails" class="car-container">
-        <app-car-card
-            (cardClicked)="onCardClicked($event)"
-            *ngFor="let carInfo of carThumbnails; trackBy: trackByCarId"
-            [car]="carInfo"
-        />
-        <p *ngIf="carThumbnails === null && carThumbnailsLoading">Loading car infos...</p>
-        <p *ngIf="carThumbnails !== null && carThumbnails.length === 0">No cars in the result</p>
+    <div class="car-container">
+        <ng-container *ngIf="carThumbnailsLoading">
+            <div class="skeleton-card" *ngFor="let item of [1,2,3,4]"></div>
+        </ng-container>
+
+        <ng-container *ngIf="carThumbnails$ | async as carThumbnails">
+            <app-car-card
+                (cardClicked)="onCardClicked($event)"
+                *ngFor="let carInfo of carThumbnails; trackBy: trackByCarId"
+                [car]="carInfo"
+            />
+            <p *ngIf="carThumbnails !== null && carThumbnails.length === 0">No cars in the result</p>
+        </ng-container>
     </div>
 
 </div>

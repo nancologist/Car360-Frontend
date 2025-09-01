@@ -4,7 +4,7 @@ import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { CarThumbnailDto } from '../../shared';
 import { ApiService } from '../../api/api.service';
 import { Router } from '@angular/router';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FilterComponent } from '../../components/filter/filter.component';
 import { Store } from '@ngrx/store';
 import { CarsActions } from '../../store/cars/cars.actions';
@@ -35,11 +35,8 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.apiService.getCarInfos().pipe(
-            tap(() => {
-                this.carThumbnailsLoading = true;
-            })
-        ).subscribe((data: CarThumbnailDto[]) => {
+        this.carThumbnailsLoading = true;
+        this.apiService.getCarInfos().subscribe((data: CarThumbnailDto[]) => {
             this.store.dispatch(CarsActions.updateCarThumbnails({ data }))
             this.carThumbnailsLoading = false;
         })
