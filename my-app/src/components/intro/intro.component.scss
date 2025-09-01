@@ -1,0 +1,61 @@
+.intro-card {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+
+    .intro-badge {
+        background: linear-gradient(90deg, #d7b24b, #f3e0a3);
+        color: #08101a;
+        font-weight: 700;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        width: 60px;
+        height: 24px;
+    }
+
+    mat-card-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    mat-card-subtitle {
+        font-size: 0.9rem;
+        color: #9aa7b2;
+    }
+
+    p {
+        line-height: 1.6;
+        margin: 1rem 0;
+        color: #e6eef6;
+    }
+
+    .numbers {
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .contact {
+        margin-top: 1rem;
+
+        a {
+            color: #d7b24b;
+            font-weight: 600;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    mat-card-footer {
+        margin-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 0.75rem;
+        font-size: 0.85rem;
+        color: #9aa7b2;
+    }
+}

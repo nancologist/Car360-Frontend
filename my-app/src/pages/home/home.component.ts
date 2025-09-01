@@ -9,6 +9,7 @@ import { FilterComponent } from '../../components/filter/filter.component';
 import { Store } from '@ngrx/store';
 import { CarsActions } from '../../store/cars/cars.actions';
 import { CarsSelectors } from '../../store/cars/cars.selectors';
+import { IntroComponent } from '../../components/intro/intro.component';
 
 
 @Component({
@@ -18,7 +19,8 @@ import { CarsSelectors } from '../../store/cars/cars.selectors';
         NgForOf,
         NgIf,
         AsyncPipe,
-        FilterComponent
+        FilterComponent,
+        IntroComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
