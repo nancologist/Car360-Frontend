@@ -9,7 +9,7 @@ import {
     SignupRequest
 } from '../shared';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment } from '../environments-old/environment';
 
 @Injectable({
     providedIn: 'root'
