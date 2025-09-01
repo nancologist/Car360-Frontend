@@ -1,20 +1,7 @@
 .intro-card {
     max-width: 900px;
-    margin: 2rem auto;
+    margin: 1rem auto;
     padding: 1rem;
-
-    .intro-badge {
-        background: linear-gradient(90deg, #d7b24b, #f3e0a3);
-        color: #08101a;
-        font-weight: 700;
-        font-size: 0.8rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50px;
-        width: 60px;
-        height: 24px;
-    }
 
     mat-card-title {
         font-size: 1.4rem;
@@ -57,5 +44,13 @@
         padding-top: 0.75rem;
         font-size: 0.85rem;
         color: #9aa7b2;
+    }
+}
+
+@media (max-width: 1064px) {
+    .intro-card {
+        max-width: unset;
+        overflow: auto;
+        height: 170px;
     }
 }

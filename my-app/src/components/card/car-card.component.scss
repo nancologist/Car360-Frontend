@@ -41,3 +41,30 @@
         justify-content: end;
     }
 }
+
+@media (max-width: 1064px) {
+    :host {
+        width: unset;
+
+        .car-card {
+            min-width: unset;
+        }
+
+        .card-header {
+            flex-direction: column;
+            margin-bottom: 20px;
+
+            img {
+                margin-bottom: 20px;
+            }
+
+            .title {
+                margin-left: 0;
+            }
+        }
+
+        .card-footer {
+            justify-content: center;
+        }
+    }
+}
