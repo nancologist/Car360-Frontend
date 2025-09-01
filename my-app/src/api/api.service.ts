@@ -9,12 +9,13 @@ import {
     SignupRequest
 } from '../shared';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
-    static BASE_URL = 'http://localhost:8080/api';
+    static BASE_URL = environment.apiUrl;
 
     constructor(private http: HttpClient) {
     }
