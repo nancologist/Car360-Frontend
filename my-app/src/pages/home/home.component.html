@@ -6,7 +6,7 @@
     </div>
 
     <div class="car-container">
-        <ng-container *ngIf="carThumbnailsLoading">
+        <ng-container *ngIf="carThumbnailsLoading$ | async">
             <div class="skeleton-card" *ngFor="let item of [1,2,3,4]"></div>
         </ng-container>
 

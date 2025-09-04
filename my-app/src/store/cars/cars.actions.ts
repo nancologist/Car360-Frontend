@@ -3,8 +3,11 @@ import { CarThumbnailDto, EquipmentDto } from '../../shared';
 
 export class CarsActions {
 
+    public static loadCarThumbnailsStart = createAction(
+        '[Cars] Load car thumbnails start'
+    )
     public static loadCarThumbnailsSuccess = createAction(
-        '[Cars] Load Cars Success',
+        '[Cars] Load car thumbnails success',
         props<{ data: CarThumbnailDto[] }>()
     )
 

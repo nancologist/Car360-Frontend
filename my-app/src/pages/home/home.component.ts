@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CarCardComponent } from "../../components/card/car-card.component";
 import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { CarThumbnailDto } from '../../shared';
-import { ApiService } from '../../api/api.service';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { FilterComponent } from '../../components/filter/filter.component';
@@ -26,24 +25,15 @@ import { IntroComponent } from '../../components/intro/intro.component';
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-    // Todo: this should goes to the store
-    carThumbnailsLoading: boolean = false;
+    carThumbnailsLoading$: Observable<boolean> = of(false);
     carThumbnails$: Observable<CarThumbnailDto[] | null> = of(null);
 
-    constructor(
-        private apiService: ApiService,
-        private router: Router,
-        private store: Store
-    ) {
+    constructor(private router: Router, private store: Store) {
     }
 
     ngOnInit() {
-        this.carThumbnailsLoading = true;
-        // todo: api call should go to the effect:
-        this.apiService.getCarInfos().subscribe((data: CarThumbnailDto[]) => {
-            this.store.dispatch(CarsActions.loadCarThumbnailsSuccess({ data }))
-            this.carThumbnailsLoading = false;
-        })
+        this.store.dispatch(CarsActions.loadCarThumbnailsStart())
+        this.carThumbnailsLoading$ = this.store.select(CarsSelectors.selectCarThumbnailsLoading);
         this.carThumbnails$ = this.store.select(CarsSelectors.selectFilteredCarThumbnails);
     }
 

@@ -12,7 +12,7 @@ export class CarsSelectors {
         this.selectCarsState, state => state.equipments
     )
 
-    public static selectAllEquipmentsLoaded = createSelector(
+    public static selectEquipmentsAlreadyLoaded = createSelector(
         this.selectCarsState, state => state.equipmentsLoaded
     )
 
@@ -35,6 +35,13 @@ export class CarsSelectors {
 
     // ---------------------------------
 
+    public static selectCarThumbnailsAlreadyLoaded = createSelector(
+        this.selectCarsState, state => state.carThumbnailsAlreadyLoaded
+    )
+
+    public static selectCarThumbnailsLoading = createSelector(
+        this.selectCarsState, state => state.carThumbnailsLoading
+    )
 
     private static selectAllCarThumbnails = createSelector(
         this.selectCarsState, state => state.carThumbnails);

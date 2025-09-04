@@ -20,7 +20,7 @@ export class ApiService {
     constructor(private http: HttpClient) {
     }
 
-    getCarInfos(): Observable<CarThumbnailDto[]> {
+    getAllCarThumbnails(): Observable<CarThumbnailDto[]> {
         return this.http.get<CarThumbnailDto[]>(ApiService.BASE_URL + '/cars')
     }
 

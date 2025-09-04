@@ -5,6 +5,8 @@ import { CarsActions } from './cars.actions';
 
 export interface CarsState {
     carThumbnails: CarThumbnailDto[] | null;
+    carThumbnailsLoading: boolean;
+    carThumbnailsAlreadyLoaded: boolean,
 
     // Equipments
     equipments: EquipmentDto[];
@@ -17,6 +19,8 @@ export interface CarsState {
 
 export const initialState: CarsState = {
     carThumbnails: null,
+    carThumbnailsLoading: false,
+    carThumbnailsAlreadyLoaded: false,
 
     equipments: [],
     equipmentsLoaded: false,
@@ -27,9 +31,16 @@ export const initialState: CarsState = {
 export const carsReducer = createReducer(
     initialState,
 
+    on(CarsActions.loadCarThumbnailsStart, (state): CarsState => ({
+        ...state,
+        carThumbnailsLoading: true
+    })),
+
     on(CarsActions.loadCarThumbnailsSuccess, (state, { data }): CarsState => ({
         ...state,
-        carThumbnails: data
+        carThumbnails: data,
+        carThumbnailsLoading: false,
+        carThumbnailsAlreadyLoaded: true
     })),
 
     // Equipments:

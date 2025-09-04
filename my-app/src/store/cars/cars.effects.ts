@@ -16,7 +16,7 @@ export class CarsEffects {
     loadEquipment$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CarsActions.loadEquipmentsStart),
-            withLatestFrom(this.store.select(CarsSelectors.selectAllEquipmentsLoaded)),
+            withLatestFrom(this.store.select(CarsSelectors.selectEquipmentsAlreadyLoaded)),
             exhaustMap(([_, alreadyLoaded]) => {
                 if (alreadyLoaded) {
                     return of({
@@ -30,5 +30,24 @@ export class CarsEffects {
                 }
             })
         )
-    )
+    );
+
+    loadCarThumbnails$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CarsActions.loadCarThumbnailsStart),
+            withLatestFrom(this.store.select(CarsSelectors.selectCarThumbnailsAlreadyLoaded)),
+            exhaustMap(([_, alreadyLoaded]) => {
+                if (alreadyLoaded) {
+                    return of({
+                        type: '[CarsEffects] Car thumbnails already' +
+                            ' loaded.'
+                    });
+                } else {
+                    return this.apiService.getAllCarThumbnails().pipe(map(
+                        (carThumbnails) => CarsActions.loadCarThumbnailsSuccess({ data: carThumbnails })
+                    ))
+                }
+            })
+        )
+    );
 }
