@@ -1,8 +1,9 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import {
     CarDto,
     CarThumbnailDto,
+    ColorOption,
     EquipmentDto,
     LoginRequest,
     LoginResponse,
@@ -32,11 +33,6 @@ export class ApiService {
         return `${ApiService.BASE_URL}/cars/${carId}/color-image`;
     }
 
-    filterCarsByEquipment(equipmentCodes: string[]) {
-        let params = new HttpParams({ fromObject: { equipmentCodes } });
-        return this.http.get<CarThumbnailDto[]>(ApiService.BASE_URL + '/cars', { params })
-    }
-
     signUpUser(signupRequest: SignupRequest) {
         return this.http.post<null>(ApiService.BASE_URL + '/auth/signup', signupRequest)
     }
@@ -48,5 +44,9 @@ export class ApiService {
 
     getAllEquipments() {
         return this.http.get<EquipmentDto[]>(ApiService.BASE_URL + `/equipments`)
+    }
+
+    getAllColorOptions() {
+        return this.http.get<ColorOption[]>(ApiService.BASE_URL + `/colors`)
     }
 }

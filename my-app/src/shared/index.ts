@@ -3,7 +3,7 @@ import { components } from './api-types';
 export type CarThumbnailDto = components["schemas"]["CarThumbnailDto"];
 export type CarDto = components["schemas"]["CarDto"];
 export type EquipmentDto = components["schemas"]["EquipmentDto"];
-export type Color = components["schemas"]["ColorDto"];
+export type ColorOption = components["schemas"]["ColorOption"];
 
 export type Equipment = components["schemas"]["Equipment"];
 export type Upholstery = components["schemas"]["Upholstery"];

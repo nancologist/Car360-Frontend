@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CarThumbnailDto, EquipmentDto } from '../../shared';
+import { CarThumbnailDto, ColorOption, EquipmentDto } from '../../shared';
 
 export class CarsActions {
 
@@ -25,5 +25,17 @@ export class CarsActions {
     public static searchEquipments = createAction(
         'Search equipments',
         props<{ search: string }>()
+    );
+
+    public static loadColorOptionsStart = createAction('Load color options' +
+        ' start');
+    public static loadColorOptionsSuccess = createAction(
+        'Load color options success',
+        props<{ data: ColorOption[] }>()
+    )
+
+    public static onColorSelected = createAction(
+        'Color selected',
+        props<{ colorIds: number[] }>()
     );
 }

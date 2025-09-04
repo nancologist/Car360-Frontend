@@ -68,6 +68,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/colors": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getAllColorOptions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/cars": {
         parameters: {
             query?: never;
@@ -142,12 +158,17 @@ export interface components {
             code: string;
             description: string;
         };
+        ColorOption: {
+            /** Format: int64 */
+            id: number;
+            description: string;
+        };
         CarThumbnailDto: {
             /** Format: int64 */
             carId: number;
             name: string;
             productionDate: string;
-            color: string;
+            color: components["schemas"]["ColorOption"];
             equipmentCodes: string[];
         };
         CarDto: {
@@ -288,6 +309,26 @@ export interface operations {
                 };
                 content: {
                     "*/*": components["schemas"]["EquipmentDto"][];
+                };
+            };
+        };
+    };
+    getAllColorOptions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "*/*": components["schemas"]["ColorOption"][];
                 };
             };
         };

@@ -5,7 +5,17 @@
             (selectedEquipmentsUpdated)="onSelectedEquipmentsUpdated($event)"
             (inputFocused)="onInputFocused()"
             [equipments]="(equipments$ | async) ?? []"
-            formControlName="searchEquipment"
+            formControlName="equipmentSearch"
         ></app-input-chip>
+        <mat-form-field appearance="outline">
+            <mat-label>Colors</mat-label>
+            <mat-select [formControl]="filterForm.controls.colorsMultiSelect" multiple>
+                <mat-option
+                    *ngFor="let color of (colorOptions$ | async)"
+                    [value]="color.id"
+                >{{ color.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </form>
 </mat-card>

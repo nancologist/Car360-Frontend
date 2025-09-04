@@ -13,7 +13,7 @@ export class CarsEffects {
     private readonly store = inject(Store);
     private readonly apiService = inject(ApiService);
 
-    loadEquipment$ = createEffect(() =>
+    loadEquipments$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CarsActions.loadEquipmentsStart),
             withLatestFrom(this.store.select(CarsSelectors.selectEquipmentsAlreadyLoaded)),
@@ -31,6 +31,25 @@ export class CarsEffects {
             })
         )
     );
+
+    loadColorOptions$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CarsActions.loadColorOptionsStart),
+            withLatestFrom(this.store.select(CarsSelectors.selectColorOptionsAlreadyLoaded)),
+            exhaustMap(([_, alreadyLoaded]) => {
+                if (alreadyLoaded) {
+                    return of({
+                        type: '[CarsEffects] Color options already' +
+                            ' loaded.'
+                    });
+                } else {
+                    return this.apiService.getAllColorOptions().pipe(map(
+                        (options) => CarsActions.loadColorOptionsSuccess({ data: options })
+                    ))
+                }
+            })
+        )
+    )
 
     loadCarThumbnails$ = createEffect(() =>
         this.actions$.pipe(

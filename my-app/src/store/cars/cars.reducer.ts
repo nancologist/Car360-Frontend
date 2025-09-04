@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { CarThumbnailDto, EquipmentDto } from '../../shared';
+import { CarThumbnailDto, ColorOption, EquipmentDto } from '../../shared';
 import { CarsActions } from './cars.actions';
 
 
@@ -14,7 +14,9 @@ export interface CarsState {
     selectedEquipments: string[];
     equipmentSearchTerm: string;
 
-    // selectedColors
+    colorOptions: ColorOption[];
+    colorOptionsAlreadyLoaded: boolean;
+    selectedColorIds: number[]
 }
 
 export const initialState: CarsState = {
@@ -26,6 +28,10 @@ export const initialState: CarsState = {
     equipmentsLoaded: false,
     selectedEquipments: [],
     equipmentSearchTerm: '',
+
+    colorOptions: [],
+    colorOptionsAlreadyLoaded: false,
+    selectedColorIds: []
 };
 
 export const carsReducer = createReducer(
@@ -56,5 +62,16 @@ export const carsReducer = createReducer(
     on(CarsActions.searchEquipments, (state, { search }) => ({
         ...state,
         equipmentSearchTerm: search
+    })),
+
+    on(CarsActions.loadColorOptionsSuccess, (state, { data }): CarsState => ({
+        ...state,
+        colorOptions: data,
+        colorOptionsAlreadyLoaded: true
+    })),
+
+    on(CarsActions.onColorSelected, (state, { colorIds }): CarsState => ({
+        ...state,
+        selectedColorIds: colorIds
     }))
 );

@@ -33,6 +33,24 @@ export class CarsSelectors {
         }
     )
 
+
+    // ColorOptions ----------------------------------------
+
+    public static selectColorOptions = createSelector(
+        this.selectCarsState,
+        state => state.colorOptions
+    )
+
+    public static selectColorOptionsAlreadyLoaded = createSelector(
+        this.selectCarsState,
+        state => state.colorOptionsAlreadyLoaded
+    )
+
+    private static selectSelectedColorIds = createSelector(
+        this.selectCarsState,
+        state => state.selectedColorIds
+    )
+
     // ---------------------------------
 
     public static selectCarThumbnailsAlreadyLoaded = createSelector(
@@ -49,13 +67,31 @@ export class CarsSelectors {
     public static selectFilteredCarThumbnails = createSelector(
         this.selectAllCarThumbnails,
         this.selectSelectedEquipments,
-        (carThumbnails, selectedEquipments) => {
-            if (carThumbnails !== null && selectedEquipments.length > 0) {
-                return carThumbnails.filter(c => {
-                    return selectedEquipments.every(selected => c.equipmentCodes.includes(selected));
-                })
+        this.selectSelectedColorIds,
+        (carThumbnails, selectedEquipments, selectedColorIds) => {
+
+            if (carThumbnails !== null) {
+
+                if (selectedEquipments.length > 0 || selectedColorIds.length > 0) {
+
+                    let filteredCarThumbnails = carThumbnails;
+                    if (selectedColorIds.length > 0) {
+                        filteredCarThumbnails = filteredCarThumbnails
+                            .filter(car => selectedColorIds.includes(car.color.id));
+                    }
+
+                    if (selectedEquipments.length > 0) {
+                        filteredCarThumbnails = filteredCarThumbnails.filter(car => {
+                            return selectedEquipments.every(selected => car.equipmentCodes.includes(selected));
+                        });
+                    }
+
+                    return filteredCarThumbnails;
+                }
+
+                return carThumbnails;
             }
-            return carThumbnails;
+            return null;
         }
     )
 }
