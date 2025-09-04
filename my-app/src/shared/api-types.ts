@@ -132,6 +132,7 @@ export interface components {
             name: string;
             productionDate: string;
             color: string;
+            equipmentCodes: string[];
         };
         CarDto: {
             /** Format: int64 */

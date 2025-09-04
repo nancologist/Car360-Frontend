@@ -26,6 +26,7 @@ import { IntroComponent } from '../../components/intro/intro.component';
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+    // Todo: this should goes to the store
     carThumbnailsLoading: boolean = false;
     carThumbnails$: Observable<CarThumbnailDto[] | null> = of(null);
 
@@ -38,11 +39,12 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.carThumbnailsLoading = true;
+        // todo: api call should go to the effect:
         this.apiService.getCarInfos().subscribe((data: CarThumbnailDto[]) => {
-            this.store.dispatch(CarsActions.updateCarThumbnails({ data }))
+            this.store.dispatch(CarsActions.loadCarThumbnailsSuccess({ data }))
             this.carThumbnailsLoading = false;
         })
-        this.carThumbnails$ = this.store.select(CarsSelectors.selectCarThumbnails);
+        this.carThumbnails$ = this.store.select(CarsSelectors.selectFilteredCarThumbnails);
     }
 
     trackByCarId(index: number, carInfo: CarThumbnailDto) {

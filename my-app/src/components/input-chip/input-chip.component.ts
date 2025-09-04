@@ -56,6 +56,9 @@ export class InputChipComponent implements ControlValueAccessor {
     @Output()
     selectedEquipmentsUpdated = new EventEmitter<EquipmentDto[]>();
 
+    @Output()
+    inputFocused = new EventEmitter();
+
     selectedEquipments: EquipmentDto[] = [];
 
     value: any = '';
@@ -108,4 +111,9 @@ export class InputChipComponent implements ControlValueAccessor {
 
     private onTouched = () => {
     };
+    protected readonly onfocus = onfocus;
+
+    onFocus() {
+        this.inputFocused.emit()
+    }
 }

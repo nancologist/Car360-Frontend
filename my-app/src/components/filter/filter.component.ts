@@ -1,22 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
-import {
-    debounceTime,
-    distinctUntilChanged,
-    map,
-    Observable,
-    of,
-    startWith,
-    switchMap
-} from 'rxjs';
+import { distinctUntilChanged, map, Observable, of } from 'rxjs';
 import { EquipmentDto } from '../../shared';
-import { ApiService } from '../../api/api.service';
 import { InputChipComponent } from '../input-chip/input-chip.component';
 import { Store } from '@ngrx/store';
-import { CarsActions } from '../../store/cars/cars.actions';
 import { CarsSelectors } from '../../store/cars/cars.selectors';
+import { CarsActions } from '../../store/cars/cars.actions';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-filter',
@@ -35,39 +27,41 @@ export class FilterComponent implements OnInit {
         searchEquipment: new FormControl('')
     })
 
-    equipments$: Observable<{ data: EquipmentDto[] | null, loading: boolean }>
-        = of({ data: null, loading: false });
+    equipments$: Observable<EquipmentDto[]> = of([]);
+    resultCount$: Observable<number | undefined> = of(0);
 
-    resultCount$: Observable<number> = of(0);
-
-    constructor(private apiService: ApiService, private store: Store) {
+    constructor(private store: Store, private destroyRef: DestroyRef) {
     }
 
     ngOnInit() {
-        this.setEquipments$();
-        this.resultCount$ = this.store.select(CarsSelectors.selectCarThumbnailsCount);
+        this.setUpEquipments();
+        this.resultCount$ = this.store
+            .select(CarsSelectors.selectFilteredCarThumbnails)
+            .pipe(map(arr => arr?.length));
+        this.equipments$ = this.store.select(CarsSelectors.selectSearchedEquipments)
     }
 
-    filterEquipments(equipments: EquipmentDto[]) {
+    onSelectedEquipmentsUpdated(equipments: EquipmentDto[]) {
         const equipmentCodes = equipments.map(e => e.code);
-        this.apiService.filterCarsByEquipment(equipmentCodes).subscribe((dtos) => {
-            this.store.dispatch(CarsActions.updateCarThumbnails({ data: dtos }))
-        })
+        this.store.dispatch(CarsActions.onEquipmentSelected({ equipmentCodes }));
     }
 
-    private setEquipments$() {
+    private setUpEquipments() {
         const equipmentControl = this.filterForm.get('searchEquipment')
         if (equipmentControl !== null) {
-            this.equipments$ = equipmentControl.valueChanges
+            equipmentControl.valueChanges
                 .pipe(
-                    debounceTime(300),
+                    takeUntilDestroyed(this.destroyRef),
                     distinctUntilChanged(),
                     map(value => value?.toLowerCase().trim() ?? ''),
-                    switchMap(search => this.apiService.searchEquipments(search))
-                ).pipe(
-                    map(data => ({ data, loading: false })),
-                    startWith({ data: null, loading: true })
                 )
+                .subscribe((search) => {
+                    this.store.dispatch(CarsActions.searchEquipments({ search }))
+                });
         }
+    }
+
+    onInputFocused() {
+        this.store.dispatch(CarsActions.loadEquipmentsStart())
     }
 }

@@ -46,7 +46,7 @@ export class ApiService {
             ApiService.BASE_URL + '/auth/login', loginRequest);
     }
 
-    searchEquipments(search: string) {
-        return this.http.get<EquipmentDto[]>(ApiService.BASE_URL + `/equipments?search=${search}`)
+    getAllEquipments() {
+        return this.http.get<EquipmentDto[]>(ApiService.BASE_URL + `/equipments`)
     }
 }
