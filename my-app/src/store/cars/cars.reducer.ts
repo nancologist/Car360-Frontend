@@ -61,6 +61,10 @@ export const carsReducer = createReducer(
         carThumbnailsLoading: false,
         carThumbnailsAlreadyLoaded: true
     })),
+    on(CarsActions.loadCarThumbnailsCancel, (state): CarsState => ({
+        ...state,
+        carThumbnailsLoading: false,
+    })),
 
     // Equipments:
     on(CarsActions.loadEquipmentsSuccess, (state, { data }) => ({

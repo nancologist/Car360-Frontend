@@ -76,6 +76,7 @@ export class CarsEffects {
             withLatestFrom(this.store.select(CarsSelectors.selectCarThumbnailsAlreadyLoaded)),
             exhaustMap(([_, alreadyLoaded]) => {
                 if (alreadyLoaded) {
+                    this.store.dispatch(CarsActions.loadCarThumbnailsCancel());
                     return of({
                         type: '[CarsEffects] Car thumbnails already' +
                             ' loaded.'

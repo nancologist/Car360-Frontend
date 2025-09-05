@@ -9,18 +9,21 @@ import {
 export class CarsActions {
 
     public static loadCarThumbnailsStart = createAction(
-        '[Cars] Load car thumbnails start'
-    )
+        '[Cars] Load car thumbnails start',
+    );
     public static loadCarThumbnailsSuccess = createAction(
         '[Cars] Load car thumbnails success',
-        props<{ data: CarThumbnailDto[] }>()
-    )
+        props<{ data: CarThumbnailDto[] }>(),
+    );
+    public static loadCarThumbnailsCancel = createAction(
+        '[Cars] Load car thumbnails cancel',
+    );
 
     // Equipment -----------------
     public static loadEquipmentsStart = createAction('Load equipments start');
     public static loadEquipmentsSuccess = createAction(
         'Load equipments success',
-        props<{ data: EquipmentDto[] }>()
+        props<{ data: EquipmentDto[] }>(),
     );
     public static onEquipmentSelected = createAction(
         '[Cars] Update selected equipments',
@@ -29,7 +32,7 @@ export class CarsActions {
 
     public static searchEquipments = createAction(
         'Search equipments',
-        props<{ search: string }>()
+        props<{ search: string }>(),
     );
 
     // Color ----------------
@@ -37,11 +40,11 @@ export class CarsActions {
         'Load color options start');
     public static loadColorOptionsSuccess = createAction(
         'Load color options success',
-        props<{ data: ColorOption[] }>()
-    )
+        props<{ data: ColorOption[] }>(),
+    );
     public static onColorSelected = createAction(
         'Color selected',
-        props<{ colorIds: number[] }>()
+        props<{ colorIds: number[] }>(),
     );
 
     // Upholstery --------------
