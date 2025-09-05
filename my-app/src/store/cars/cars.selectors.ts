@@ -46,7 +46,7 @@ export class CarsSelectors {
         state => state.colorOptionsAlreadyLoaded,
     );
 
-    private static selectSelectedColorIds = createSelector(
+    public static selectSelectedColorIds = createSelector(
         this.selectCarsState,
         state => state.selectedColorIds,
     );
@@ -66,7 +66,7 @@ export class CarsSelectors {
         state => state.upholsteryOptionsAlreadyLoaded,
     );
 
-    private static selectSelectedUpholsteryIds = createSelector(
+    public static selectSelectedUpholsteryIds = createSelector(
         this.selectCarsState,
         state => state.selectedUpholsteryIds,
     );

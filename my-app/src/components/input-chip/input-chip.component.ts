@@ -3,20 +3,20 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    Output
+    Output,
 } from '@angular/core';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 } from '@angular/forms';
 import { NgForOf } from '@angular/common';
 import {
     MatAutocomplete,
     MatAutocompleteSelectedEvent,
     MatAutocompleteTrigger,
-    MatOption
+    MatOption,
 } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
@@ -55,9 +55,6 @@ export class InputChipComponent implements ControlValueAccessor {
 
     @Output()
     selectedEquipmentsUpdated = new EventEmitter<EquipmentDto[]>();
-
-    @Output()
-    inputFocused = new EventEmitter();
 
     selectedEquipments: EquipmentDto[] = [];
 
@@ -111,9 +108,4 @@ export class InputChipComponent implements ControlValueAccessor {
 
     private onTouched = () => {
     };
-    protected readonly onfocus = onfocus;
-
-    onFocus() {
-        this.inputFocused.emit()
-    }
 }

@@ -5,7 +5,6 @@
     <mat-chip-grid #chipGrid aria-label="Equipments selection">
         <input
             (input)="onInput($event)"
-            (focus)="onFocus()"
             [matAutocomplete]="auto"
             [matChipInputFor]="chipGrid"
             [value]="value"

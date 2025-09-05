@@ -2,8 +2,7 @@
     <form [formGroup]="filterForm">
         <div class="info">Results: {{ resultCount$ | async }}</div>
         <app-input-chip
-            (selectedEquipmentsUpdated)="onSelectedEquipmentsUpdated($event)"
-            (inputFocused)="onInputFocused()"
+            (selectedEquipmentsUpdated)="onSelectedEquipmentsChanged($event)"
             [equipments]="(equipments$ | async) ?? []"
             formControlName="equipmentSearch"
         ></app-input-chip>
