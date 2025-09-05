@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import {
     CarDto,
     CarThumbnailDto,
@@ -7,7 +7,8 @@ import {
     EquipmentDto,
     LoginRequest,
     LoginResponse,
-    SignupRequest
+    SignupRequest,
+    UpholsteryOption,
 } from '../shared';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -48,5 +49,9 @@ export class ApiService {
 
     getAllColorOptions() {
         return this.http.get<ColorOption[]>(ApiService.BASE_URL + `/colors`)
+    }
+
+    getAllUpholsteryOptions() {
+        return this.http.get<UpholsteryOption[]>(ApiService.BASE_URL + `/upholsteries`);
     }
 }

@@ -51,6 +51,25 @@ export class CarsEffects {
         )
     )
 
+    loadUpholsteryOptions$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CarsActions.loadUpholsteryOptionsStart),
+            withLatestFrom(this.store.select(CarsSelectors.selectUpholsteryOptionsAlreadyLoaded)),
+            exhaustMap(([_, alreadyLoaded]) => {
+                if (alreadyLoaded) {
+                    return of({
+                        type: '[CarsEffects] Upholstery options already' +
+                            ' loaded.',
+                    });
+                } else {
+                    return this.apiService.getAllUpholsteryOptions().pipe(map(
+                        (options) => CarsActions.loadUpholsteryOptionsSuccess({ data: options }),
+                    ));
+                }
+            }),
+        ),
+    );
+
     loadCarThumbnails$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CarsActions.loadCarThumbnailsStart),

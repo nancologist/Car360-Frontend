@@ -9,57 +9,77 @@ export class CarsSelectors {
     // Equipments ----------------------
 
     public static selectAllEquipments = createSelector(
-        this.selectCarsState, state => state.equipments
-    )
+        this.selectCarsState, state => state.equipments,
+    );
 
     public static selectEquipmentsAlreadyLoaded = createSelector(
-        this.selectCarsState, state => state.equipmentsLoaded
-    )
+        this.selectCarsState, state => state.equipmentsLoaded,
+    );
 
     public static selectSelectedEquipments = createSelector(
-        this.selectCarsState, state => state.selectedEquipments
-    )
+        this.selectCarsState, state => state.selectedEquipments,
+    );
 
     private static selectEquipmentSearchTerm = createSelector(
-        this.selectCarsState, state => state.equipmentSearchTerm
-    )
+        this.selectCarsState, state => state.equipmentSearchTerm,
+    );
 
     public static selectSearchedEquipments = createSelector(
         this.selectAllEquipments,
         this.selectEquipmentSearchTerm,
         (equipments, search) => {
             if (!search) return equipments;
-            return equipments.filter(e => e.description.toLowerCase().includes(search))
-        }
-    )
+            return equipments.filter(e => e.description.toLowerCase().includes(search));
+        },
+    );
 
 
-    // ColorOptions ----------------------------------------
+    // Color ----------------------------
 
     public static selectColorOptions = createSelector(
         this.selectCarsState,
-        state => state.colorOptions
-    )
+        state => state.colorOptions,
+    );
 
     public static selectColorOptionsAlreadyLoaded = createSelector(
         this.selectCarsState,
-        state => state.colorOptionsAlreadyLoaded
-    )
+        state => state.colorOptionsAlreadyLoaded,
+    );
 
     private static selectSelectedColorIds = createSelector(
         this.selectCarsState,
-        state => state.selectedColorIds
-    )
+        state => state.selectedColorIds,
+    );
+
+    // ---------------------------------
+
+
+    // Upholstery ----------------------
+
+    public static selectUpholsteryOptions = createSelector(
+        this.selectCarsState,
+        state => state.upholsteryOptions,
+    );
+
+    public static selectUpholsteryOptionsAlreadyLoaded = createSelector(
+        this.selectCarsState,
+        state => state.upholsteryOptionsAlreadyLoaded,
+    );
+
+    private static selectSelectedUpholsteryIds = createSelector(
+        this.selectCarsState,
+        state => state.selectedUpholsteryIds,
+    );
 
     // ---------------------------------
 
     public static selectCarThumbnailsAlreadyLoaded = createSelector(
-        this.selectCarsState, state => state.carThumbnailsAlreadyLoaded
-    )
+        this.selectCarsState, state => state.carThumbnailsAlreadyLoaded,
+    );
 
     public static selectCarThumbnailsLoading = createSelector(
-        this.selectCarsState, state => state.carThumbnailsLoading
-    )
+        this.selectCarsState, state => state.carThumbnailsLoading,
+    );
 
     private static selectAllCarThumbnails = createSelector(
         this.selectCarsState, state => state.carThumbnails);
@@ -68,16 +88,24 @@ export class CarsSelectors {
         this.selectAllCarThumbnails,
         this.selectSelectedEquipments,
         this.selectSelectedColorIds,
-        (carThumbnails, selectedEquipments, selectedColorIds) => {
+        this.selectSelectedUpholsteryIds,
+        (carThumbnails, selectedEquipments, selectedColorIds, selectedUpholsteryIds) => {
 
             if (carThumbnails !== null) {
 
-                if (selectedEquipments.length > 0 || selectedColorIds.length > 0) {
+                if (selectedEquipments.length > 0
+                    || selectedColorIds.length > 0
+                    || selectedUpholsteryIds.length > 0) {
 
                     let filteredCarThumbnails = carThumbnails;
                     if (selectedColorIds.length > 0) {
                         filteredCarThumbnails = filteredCarThumbnails
                             .filter(car => selectedColorIds.includes(car.color.id));
+                    }
+
+                    if (selectedUpholsteryIds.length > 0) {
+                        filteredCarThumbnails = filteredCarThumbnails
+                            .filter(car => selectedUpholsteryIds.includes(car.upholsteryId));
                     }
 
                     if (selectedEquipments.length > 0) {
@@ -92,6 +120,6 @@ export class CarsSelectors {
                 return carThumbnails;
             }
             return null;
-        }
-    )
+        },
+    );
 }

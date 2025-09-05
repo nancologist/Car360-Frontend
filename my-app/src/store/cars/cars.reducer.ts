@@ -1,5 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { CarThumbnailDto, ColorOption, EquipmentDto } from '../../shared';
+import {
+    CarThumbnailDto,
+    ColorOption,
+    EquipmentDto,
+    UpholsteryOption,
+} from '../../shared';
 import { CarsActions } from './cars.actions';
 
 
@@ -16,7 +21,11 @@ export interface CarsState {
 
     colorOptions: ColorOption[];
     colorOptionsAlreadyLoaded: boolean;
-    selectedColorIds: number[]
+    selectedColorIds: number[];
+
+    upholsteryOptions: UpholsteryOption[];
+    upholsteryOptionsAlreadyLoaded: boolean;
+    selectedUpholsteryIds: number[]
 }
 
 export const initialState: CarsState = {
@@ -31,7 +40,11 @@ export const initialState: CarsState = {
 
     colorOptions: [],
     colorOptionsAlreadyLoaded: false,
-    selectedColorIds: []
+    selectedColorIds: [],
+
+    upholsteryOptions: [],
+    upholsteryOptionsAlreadyLoaded: false,
+    selectedUpholsteryIds: [],
 };
 
 export const carsReducer = createReducer(
@@ -73,5 +86,16 @@ export const carsReducer = createReducer(
     on(CarsActions.onColorSelected, (state, { colorIds }): CarsState => ({
         ...state,
         selectedColorIds: colorIds
+    })),
+
+    on(CarsActions.loadUpholsteryOptionsSuccess, (state, { data }): CarsState => ({
+        ...state,
+        upholsteryOptions: data,
+        upholsteryOptionsAlreadyLoaded: true,
+    })),
+
+    on(CarsActions.onUpholsterySelected, (state, { upholsteryIds }): CarsState => ({
+        ...state,
+        selectedUpholsteryIds: upholsteryIds,
     }))
 );

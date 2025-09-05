@@ -7,6 +7,7 @@
             [equipments]="(equipments$ | async) ?? []"
             formControlName="equipmentSearch"
         ></app-input-chip>
+
         <mat-form-field appearance="outline">
             <mat-label>Colors</mat-label>
             <mat-select [formControl]="filterForm.controls.colorsMultiSelect" multiple>
@@ -14,6 +15,17 @@
                     *ngFor="let color of (colorOptions$ | async)"
                     [value]="color.id"
                 >{{ color.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Upholstery</mat-label>
+            <mat-select [formControl]="filterForm.controls.upholsteriesMultiSelect" multiple>
+                <mat-option
+                    *ngFor="let upholstery of (upholsteryOptions$ | async)"
+                    [value]="upholstery.id"
+                >{{ upholstery.description }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

@@ -36,6 +36,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/api/upholsteries': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations['getAllUpholsteryOptions'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/equipments": {
         parameters: {
             query?: never;
@@ -152,6 +168,11 @@ export interface components {
             username?: string;
             email?: string;
         };
+        UpholsteryOption: {
+            /** Format: int64 */
+            id: number;
+            description: string;
+        };
         EquipmentDto: {
             /** Format: int64 */
             id: number;
@@ -169,6 +190,8 @@ export interface components {
             name: string;
             productionDate: string;
             color: components["schemas"]["ColorOption"];
+            /** Format: int64 */
+            upholsteryId: number;
             equipmentCodes: string[];
         };
         CarDto: {
@@ -267,6 +290,26 @@ export interface operations {
                 };
                 content: {
                     "*/*": components["schemas"]["LoginResponse"];
+                };
+            };
+        };
+    };
+    getAllUpholsteryOptions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    '*/*': components['schemas']['UpholsteryOption'][];
                 };
             };
         };

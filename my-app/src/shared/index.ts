@@ -4,6 +4,7 @@ export type CarThumbnailDto = components["schemas"]["CarThumbnailDto"];
 export type CarDto = components["schemas"]["CarDto"];
 export type EquipmentDto = components["schemas"]["EquipmentDto"];
 export type ColorOption = components["schemas"]["ColorOption"];
+export type UpholsteryOption = components['schemas']['UpholsteryOption'];
 
 export type Equipment = components["schemas"]["Equipment"];
 export type Upholstery = components["schemas"]["Upholstery"];

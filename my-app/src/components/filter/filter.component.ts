@@ -3,7 +3,7 @@ import { MatCard } from '@angular/material/card';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgForOf } from '@angular/common';
 import { distinctUntilChanged, map, Observable, of } from 'rxjs';
-import { ColorOption, EquipmentDto } from '../../shared';
+import { ColorOption, EquipmentDto, UpholsteryOption } from '../../shared';
 import { InputChipComponent } from '../input-chip/input-chip.component';
 import { Store } from '@ngrx/store';
 import { CarsSelectors } from '../../store/cars/cars.selectors';
@@ -24,17 +24,19 @@ import { MatSelectModule } from '@angular/material/select';
         NgForOf,
     ],
     templateUrl: './filter.component.html',
-    styleUrl: './filter.component.scss'
+    styleUrl: './filter.component.scss',
 })
 export class FilterComponent implements OnInit {
 
     filterForm = new FormGroup({
         equipmentSearch: new FormControl(''),
-        colorsMultiSelect: new FormControl<number[]>([])
-    })
+        colorsMultiSelect: new FormControl<number[]>([]),
+        upholsteriesMultiSelect: new FormControl<number[]>([]),
+    });
 
     equipments$: Observable<EquipmentDto[]> = of([]);
     colorOptions$: Observable<ColorOption[]> = of([]);
+    upholsteryOptions$: Observable<UpholsteryOption[]> = of([]);
 
     resultCount$: Observable<number | undefined> = of(0);
 
@@ -43,20 +45,32 @@ export class FilterComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(CarsActions.loadColorOptionsStart());
+        this.store.dispatch(CarsActions.loadUpholsteryOptionsStart());
+
         this.filterForm.get('colorsMultiSelect')?.valueChanges
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((colorIds) =>
                 this.store.dispatch(
-                    CarsActions.onColorSelected({ colorIds: colorIds ?? [] })
-                )
+                    CarsActions.onColorSelected({ colorIds: colorIds ?? [] }),
+                ),
+            );
+
+        this.filterForm.get('upholsteriesMultiSelect')?.valueChanges
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((upholsteryIds) =>
+                this.store.dispatch(
+                    CarsActions.onColorSelected({ colorIds: upholsteryIds ?? [] }),
+                ),
             );
 
         this.setUpEquipments();
         this.resultCount$ = this.store
             .select(CarsSelectors.selectFilteredCarThumbnails)
             .pipe(map(arr => arr?.length));
-        this.equipments$ = this.store.select(CarsSelectors.selectSearchedEquipments)
-        this.colorOptions$ = this.store.select(CarsSelectors.selectColorOptions)
+
+        this.equipments$ = this.store.select(CarsSelectors.selectSearchedEquipments);
+        this.colorOptions$ = this.store.select(CarsSelectors.selectColorOptions);
+        this.upholsteryOptions$ = this.store.select(CarsSelectors.selectUpholsteryOptions);
     }
 
     onSelectedEquipmentsUpdated(equipments: EquipmentDto[]) {
@@ -65,7 +79,7 @@ export class FilterComponent implements OnInit {
     }
 
     private setUpEquipments() {
-        const equipmentControl = this.filterForm.get('equipmentSearch')
+        const equipmentControl = this.filterForm.get('equipmentSearch');
         if (equipmentControl !== null) {
             equipmentControl.valueChanges
                 .pipe(
@@ -74,12 +88,12 @@ export class FilterComponent implements OnInit {
                     map(value => value?.toLowerCase().trim() ?? ''),
                 )
                 .subscribe((search) => {
-                    this.store.dispatch(CarsActions.searchEquipments({ search }))
+                    this.store.dispatch(CarsActions.searchEquipments({ search }));
                 });
         }
     }
 
     onInputFocused() {
-        this.store.dispatch(CarsActions.loadEquipmentsStart())
+        this.store.dispatch(CarsActions.loadEquipmentsStart());
     }
 }
