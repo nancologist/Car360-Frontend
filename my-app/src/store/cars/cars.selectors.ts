@@ -110,7 +110,7 @@ export class CarsSelectors {
 
                     if (selectedEquipments.length > 0) {
                         filteredCarThumbnails = filteredCarThumbnails.filter(car => {
-                            return selectedEquipments.every(selected => car.equipmentCodes.includes(selected));
+                            return selectedEquipments.every(selected => car.equipmentCodes.includes(selected.code));
                         });
                     }
 

@@ -3,6 +3,7 @@ import {
     EventEmitter,
     forwardRef,
     Input,
+    OnInit,
     Output,
 } from '@angular/core';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
@@ -21,6 +22,9 @@ import {
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { EquipmentDto } from '../../shared';
+import { CarsSelectors } from '../../store/cars/cars.selectors';
+import { take } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-input-chip',
@@ -48,7 +52,7 @@ import { EquipmentDto } from '../../shared';
         }
     ]
 })
-export class InputChipComponent implements ControlValueAccessor {
+export class InputChipComponent implements ControlValueAccessor, OnInit {
 
     @Input({ required: true })
     equipments!: EquipmentDto[];
@@ -60,6 +64,22 @@ export class InputChipComponent implements ControlValueAccessor {
 
     value: any = '';
     isDisabled: boolean = false;
+
+    constructor(private readonly store: Store) {
+    }
+
+
+    ngOnInit() {
+        this.initSelectedEquipments();
+    }
+
+    private initSelectedEquipments() {
+        this.store.select(CarsSelectors.selectSelectedEquipments)
+            .pipe(take(1))
+            .subscribe(equipments => {
+                this.selectedEquipments = equipments;
+            });
+    }
 
     remove(equipment: EquipmentDto) {
         this.selectedEquipments = this.selectedEquipments.filter(equ => equ.id !== equipment.id);

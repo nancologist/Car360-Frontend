@@ -96,9 +96,8 @@ export class FilterComponent implements OnInit {
             );
     }
 
-    onSelectedEquipmentsChanged(equipments: EquipmentDto[]) {
-        const equipmentCodes = equipments.map(e => e.code);
-        this.store.dispatch(CarsActions.onEquipmentSelected({ equipmentCodes }));
+    onSelectedEquipmentsChanged(selectedEquipments: EquipmentDto[]) {
+        this.store.dispatch(CarsActions.onEquipmentSelected({ equipments: selectedEquipments }));
     }
 
     private onSelectedColorsChanged() {

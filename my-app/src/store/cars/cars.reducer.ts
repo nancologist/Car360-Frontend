@@ -16,7 +16,7 @@ export interface CarsState {
     // Equipments
     equipments: EquipmentDto[];
     equipmentsLoaded: boolean;
-    selectedEquipments: string[];
+    selectedEquipments: EquipmentDto[];
     equipmentSearchTerm: string;
 
     colorOptions: ColorOption[];
@@ -72,9 +72,9 @@ export const carsReducer = createReducer(
         equipments: data,
         equipmentsLoaded: true
     })),
-    on(CarsActions.onEquipmentSelected, (state, { equipmentCodes }) => ({
+    on(CarsActions.onEquipmentSelected, (state, { equipments }) => ({
         ...state,
-        selectedEquipments: equipmentCodes
+        selectedEquipments: equipments,
     })),
     on(CarsActions.searchEquipments, (state, { search }) => ({
         ...state,

@@ -27,7 +27,7 @@ export class CarsActions {
     );
     public static onEquipmentSelected = createAction(
         '[Cars] Update selected equipments',
-        props<{ equipmentCodes: string[] }>(),
+        props<{ equipments: EquipmentDto[] }>(),
     );
 
     public static searchEquipments = createAction(
