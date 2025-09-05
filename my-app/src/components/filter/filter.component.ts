@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe, NgForOf } from '@angular/common';
+import { AsyncPipe, NgForOf, TitleCasePipe } from '@angular/common';
 import { distinctUntilChanged, map, Observable, of } from 'rxjs';
 import { ColorOption, EquipmentDto, UpholsteryOption } from '../../shared';
 import { InputChipComponent } from '../input-chip/input-chip.component';
@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
         MatFormField,
         MatSelectModule,
         NgForOf,
+        TitleCasePipe,
     ],
     templateUrl: './filter.component.html',
     styleUrl: './filter.component.scss',

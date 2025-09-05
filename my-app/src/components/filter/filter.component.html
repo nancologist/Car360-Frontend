@@ -14,7 +14,7 @@
                 <mat-option
                     *ngFor="let color of (colorOptions$ | async)"
                     [value]="color.id"
-                >{{ color.description }}
+                >{{ color.description | titlecase }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -25,7 +25,7 @@
                 <mat-option
                     *ngFor="let upholstery of (upholsteryOptions$ | async)"
                     [value]="upholstery.id"
-                >{{ upholstery.description }}
+                >{{ upholstery.description | titlecase }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
