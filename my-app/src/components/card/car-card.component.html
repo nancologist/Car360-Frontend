@@ -1,6 +1,7 @@
 <mat-card
     *ngIf="car"
     class="car-card"
+    (click)="viewCarDetails(car.carId)"
 >
     <div class="card-header">
         <img
@@ -17,13 +18,5 @@
             <div class="subtitle">Produced on {{ car.productionDate | date }}</div>
             <div class="subtitle">{{ car.color.description | titlecase }}</div>
         </div>
-    </div>
-
-    <div class="card-footer">
-        <button
-            (click)="viewCarDetails(car.carId)"
-            mat-button
-        >View Details
-        </button>
     </div>
 </mat-card>
